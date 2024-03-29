@@ -1,10 +1,25 @@
-﻿namespace Domain.Entities;
+﻿using Domain.ValueObjects.User;
+
+namespace Domain.Entities;
 
 public class User
 {
-    public Guid Id { get; private set; }
-    public string FirstName { get; private set; }
-    public string LastName  { get; private set; }
-    public string Password { get; private set; }
-    public string Role { get; private set; }
+    public UserId Id { get; private set; }
+    public Email Email { get; private set; }
+    public FirstName FirstName { get; private set; }
+    public LastName LastName  { get; private set; }
+    public Password Password { get; private set; }
+    public Role Role { get; private set; }
+    public ICollection<UserRepository> Repositories { get; set; } = new List<UserRepository>();
+
+
+    public User(UserId id, Email email, FirstName firstName, LastName lastName, Password password, Role role)
+    {
+        Id = id;
+        Email = email;
+        FirstName = firstName;
+        LastName = lastName;
+        Password = password;
+        Role = role;
+    }
 }
