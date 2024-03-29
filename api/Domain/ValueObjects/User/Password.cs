@@ -8,7 +8,7 @@ public record Password
     
     public Password(string value)
     {
-        if ( string.IsNullOrWhiteSpace(value) || value.Length < 4 || value.Length > 50)
+        if ( string.IsNullOrWhiteSpace(value) || value.Length < 4 || value.Length > 200)
         {
             throw new InvalidPasswordException();
         }
