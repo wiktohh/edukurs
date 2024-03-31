@@ -12,7 +12,9 @@ public static class Extensions
     public static IServiceCollection AddPostgres(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IAccountRepository, AccountRepository>();
+        services.AddScoped<IRepRepository, RepRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<ITicketRepository, TicketRepository>();
         services.Configure<PostgresOptions>(configuration.GetRequiredSection(OptionsSectionName));
         var postgresOptions = configuration.GetConfiguration<PostgresOptions>(OptionsSectionName);
         services.AddDbContext<DataContext>(options =>

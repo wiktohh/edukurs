@@ -14,7 +14,7 @@ public class RepRepository : IRepRepository
         _context = context;
     }
     
-    public async Task<ICollection<Repository>> GetAllRepositoriesAsync() => await _context.Repositories.ToListAsync();
+    public IQueryable<Repository> GetAllRepositoriesAsync() => _context.Repositories.Include(x=>x.Users).ThenInclude(x=>x.User).AsQueryable();
 
     public async Task<Repository> GetRepositoryByIdAsync(RepositoryId Id)=> await _context.Repositories.SingleOrDefaultAsync(x => x.Id == Id);
 

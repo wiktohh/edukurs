@@ -11,7 +11,7 @@ public class User
     public Password Password { get; private set; }
     public Role Role { get; private set; }
     public ICollection<UserRepository> Repositories { get; set; } = new List<UserRepository>();
-
+    public ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
 
     public User(UserId id, Email email, FirstName firstName, LastName lastName, Password password, Role role)
     {
