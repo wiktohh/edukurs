@@ -492,6 +492,7 @@
         "dependencies": {
           "Domain": "1.0.0",
           "MediatR": "12.2.0",
+          "Microsoft.EntityFrameworkCore": "8.0.3",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.1"
         },
         "compile": {
