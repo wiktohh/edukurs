@@ -5,6 +5,7 @@ using Application.DTO.Request;
 using Application.Query.UserQueries.GetUser;
 using Application.Security;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;
@@ -50,6 +51,7 @@ public class UserController : ControllerBase
     }
     
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<ActionResult<UserDto>> Get(Guid id)
     {
         var query = new GetUserByIdQuery(){Id = id};
@@ -58,6 +60,7 @@ public class UserController : ControllerBase
     }
     
     [HttpGet("email/{email}")]
+    [Authorize]
     public async Task<ActionResult<UserDto>> Get(string email)
     {
         var query = new GetUserByEmailQuery(){Email = email};
@@ -66,6 +69,7 @@ public class UserController : ControllerBase
     }
     
     [HttpGet("me")]
+    [Authorize]
     public async Task<ActionResult<UserDto>> Get()
     {
         if(User.Identity?.Name is null)
