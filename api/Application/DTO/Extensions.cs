@@ -8,4 +8,10 @@ public static class Extensions
     {
         return new UserDto(user.FirstName, user.LastName, user.Email, user.Role);
     }
+    
+    public static RepositoryDto AsDto(this Repository repository)
+    {
+        var users = repository.Users.Select(user => user.User.AsDto()).ToList();
+        return new RepositoryDto(repository.Id, repository.Name, repository.OwnerId,users);
+    }
 }
