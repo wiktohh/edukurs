@@ -12,6 +12,7 @@ public class User
     public Role Role { get; private set; }
     public ICollection<UserRepository> Repositories { get; set; } = new List<UserRepository>();
     public ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
+    public virtual ICollection<SubmittedTask> SubmittedTasks { get; set; } = new List<SubmittedTask>();
 
     public User(UserId id, Email email, FirstName firstName, LastName lastName, Password password, Role role)
     {

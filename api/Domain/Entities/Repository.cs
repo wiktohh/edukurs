@@ -9,6 +9,7 @@ public class Repository
     public ICollection<UserRepository> Users { get; set; } = new List<UserRepository>();
     public ICollection<Ticket> Tickets { get; set; } = new List<Ticket>();
     public Guid OwnerId { get; set; } 
+    public ICollection<RepTask> RepTasks { get; set; } = new List<RepTask>();
     
     public Repository(RepositoryId id, Name name, Guid ownerId)
     {

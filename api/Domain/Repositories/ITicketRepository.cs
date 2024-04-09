@@ -8,6 +8,6 @@ public interface ITicketRepository
     IQueryable<Ticket> GetAllTicketsAsync();
     Task<Ticket> GetTicketByIdAsync(TicketId Id);
     Task AddTicketAsync(Ticket ticket);
-    Task UpdateTicketAsync(Ticket ticket);
-    Task DeleteTicketAsync(Ticket ticket);
+    void UpdateTicketAsync(Ticket ticket);
+    void DeleteTicketAsync(Ticket ticket);
 }
