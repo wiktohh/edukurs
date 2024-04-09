@@ -14,6 +14,8 @@ public class DataContext : DbContext
     public DbSet<Repository> Repositories { get; set; }
     public DbSet<UserRepository> UserRepository { get; set; }
     public DbSet<Ticket> Tickets { get; set; }
+    public DbSet<SubmittedTask> SubmittedReports { get; set; }
+    public DbSet<RepTask> Tasks { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

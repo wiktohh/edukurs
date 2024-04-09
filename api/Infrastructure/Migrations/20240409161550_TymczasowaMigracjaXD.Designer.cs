@@ -3,6 +3,7 @@ using System;
 using Infrastructure.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240409161550_TymczasowaMigracjaXD")]
+    partial class TymczasowaMigracjaXD
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,36 +24,6 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("Domain.Entities.RepTask", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("Deadline")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("RepositoryId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("RepositoryId1")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RepositoryId1");
-
-                    b.ToTable("Tasks");
-                });
 
             modelBuilder.Entity("Domain.Entities.Repository", b =>
                 {
@@ -68,31 +41,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Repositories");
-                });
-
-            modelBuilder.Entity("Domain.Entities.SubmittedTask", b =>
-                {
-                    b.Property<Guid>("Guid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("RepTaskId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Guid");
-
-                    b.HasIndex("RepTaskId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("SubmittedReports");
                 });
 
             modelBuilder.Entity("Domain.Entities.Ticket", b =>
@@ -172,36 +120,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("UserRepository");
                 });
 
-            modelBuilder.Entity("Domain.Entities.RepTask", b =>
-                {
-                    b.HasOne("Domain.Entities.Repository", "Repository")
-                        .WithMany("RepTasks")
-                        .HasForeignKey("RepositoryId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Repository");
-                });
-
-            modelBuilder.Entity("Domain.Entities.SubmittedTask", b =>
-                {
-                    b.HasOne("Domain.Entities.RepTask", "RepTask")
-                        .WithMany("SubmittedTasks")
-                        .HasForeignKey("RepTaskId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.User", "User")
-                        .WithMany("SubmittedTasks")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("RepTask");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Domain.Entities.Ticket", b =>
                 {
                     b.HasOne("Domain.Entities.Repository", "Repository")
@@ -240,15 +158,8 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Domain.Entities.RepTask", b =>
-                {
-                    b.Navigation("SubmittedTasks");
-                });
-
             modelBuilder.Entity("Domain.Entities.Repository", b =>
                 {
-                    b.Navigation("RepTasks");
-
                     b.Navigation("Tickets");
 
                     b.Navigation("Users");
@@ -257,8 +168,6 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
                     b.Navigation("Repositories");
-
-                    b.Navigation("SubmittedTasks");
 
                     b.Navigation("Tickets");
                 });
