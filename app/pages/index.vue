@@ -1,3 +1,3 @@
 <template>
-  <div>XD</div>
+  <v-btn>XD</v-btn>
 </template>
