@@ -3,39 +3,35 @@
     <v-main>
       <v-container class="container">
         <div class="theme">
+          <LanguagesButtons />
           <ChangeThemeButton />
         </div>
         <v-row>
           <v-col class="content">
             <div>
-              <h2>Welcome to Edukurs</h2>
+              <h2>{{ $t("landingPage.welcome") }}</h2>
               <p>
-                Czy czujesz, że organizacja i przekazywanie materiałów w ramach
-                swoich zajęć jest czasochłonna i męcząca? Poznaj Edukurs -
-                innowacyjną platformę, która ułatwia przekazywanie plików,
-                projektów i zadań w trakcie kursów!
+                {{ $t("landingPage.welcomeDescription") }}
               </p>
             </div>
             <div>
-              <h2>Dlaczego Edukurs?</h2>
+              <h2>{{ $t("landingPage.why") }}</h2>
               <p>
-                Edukurs został stworzony z myślą o nauczycielach i studentach,
-                którzy chcą efektywniej zarządzać swoimi zadaniami i materiałami
-                kursowymi.
+                {{ $t("landingPage.whyDescription") }}
               </p>
             </div>
             <div>
-              <h2>How it works?</h2>
+              <h2>{{ $t("landingPage.howWorks") }}</h2>
               <p>
-                Edukurs is a platform that allows teachers to create courses and
-                share materials with students. Students can easily access the
-                materials and submit their projects.
+                {{ $t("landingPage.howWorksDescription") }}
               </p>
             </div>
             <div class="auth-section">
-              <v-btn to="/auth?variant=register"> Zarejestruj się </v-btn>
+              <v-btn to="/auth?variant=register">
+                {{ $t("auth.register") }}</v-btn
+              >
               <div>lub</div>
-              <v-btn to="/auth?variant=login"> Zaloguj się </v-btn>
+              <v-btn to="/auth?variant=login"> {{ $t("auth.login") }} </v-btn>
             </div>
           </v-col>
           <v-col class="photo-section">
@@ -64,6 +60,8 @@ import LandingPagePhoto from "~/assets/landing-page-photo.svg";
   gap: 2rem;
 
   .theme {
+    display: flex;
+    gap: 0.5rem;
     position: absolute;
     top: 0;
     right: 0;

@@ -1,0 +1,40 @@
+{
+  "auth": {
+    "loginTitle": "Zaloguj się do Edukurs",
+    "registerTitle": "Zarejestruj się w Edukurs",
+    "email": "E-mail",
+    "password": "Hasło",
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "login": "Zaloguj się",
+    "register": "Zarejestruj się",
+    "logout": "Wyloguj się",
+    "alreadyHaveAccount": "Posiadasz już konto?",
+    "dontHaveAccount": "Nie masz jeszcze konta?",
+    "back": "Powrót"
+  },
+  "landingPage": {
+    "welcome": "Witamy w Edukurs",
+    "welcomeDescription": "Czujesz, że organizowanie i przesyłanie materiałów na zajęciach jest czasochłonne i męczące? Poznaj Edukurs - innowacyjną platformę, która ułatwia przesyłanie plików, projektów i zadań w kursach!",
+    "why": "Dlaczego Edukurs?",
+    "whyDescription": "Edukurs został stworzony dla nauczycieli i uczniów, którzy chcą efektywniej zarządzać swoimi zadaniami i materiałami kursowymi.",
+    "howWorks": "Jak to działa?",
+    "howWorksDescription": "Edukurs to platforma, która umożliwia nauczycielom tworzenie kursów i udostępnianie materiałów uczniom. Uczniowie mogą łatwo uzyskać dostęp do materiałów i przesyłać swoje projekty."
+  },
+  "menu": {
+    "home": "Strona główna",
+    "allCourses": "Wszystkie kursy",
+    "administrationPanel": "Panel administracyjny"
+  },
+  "courses": {
+    "courses": "Kursy:",
+    "teacher": "Nauczyciel",
+    "join": "Dołącz do kursu"
+  },
+  "home": {
+    "hello": "Hej",
+    "yourCourses": "Twoje kursy",
+    "noCourses": "Nie jesteś zapisany do żadnego kursy jeszcze.",
+    "details": "Szczegóły"
+  }
+}

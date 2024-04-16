@@ -5,13 +5,15 @@
       <v-container class="container">
         <v-row>
           <v-col cols="12">
-            <h2>Courses:</h2>
+            <h2>{{ $t("courses.courses") }}</h2>
             <div class="courses">
               <v-card class="course" v-for="course in courses" :key="course.id">
                 <v-card-title>{{ course.title }}</v-card-title>
-                <v-card-text>Teacher: {{ course.teacher }}</v-card-text>
+                <v-card-text
+                  >{{ $t("courses.teacher") }} {{ course.teacher }}</v-card-text
+                >
                 <v-card-actions>
-                  <v-btn class="course-btn">Join to course</v-btn>
+                  <v-btn class="course-btn">{{ $t("courses.join") }}</v-btn>
                 </v-card-actions>
               </v-card>
             </div>
@@ -22,8 +24,6 @@
   </v-layout>
 </template>
 <script lang="ts" setup>
-import Header from "~/components/Header/Header.vue";
-
 const courses = ref([
   {
     id: 1,

@@ -2,48 +2,65 @@
   <div class="main">
     <v-btn @click="backToHomePage" variant="plain" class="back-button">
       <v-icon class="arrow-icon">mdi-arrow-left</v-icon>
-      Powrót
+      {{ $t("auth.back") }}
     </v-btn>
-    <ChangeThemeButton class="theme-button" />
-    <h1>{{ variant === "register" ? "Rejestracja" : "Logowanie" }}</h1>
+    <div class="theme-button">
+      <LanguagesButtons />
+      <ChangeThemeButton />
+    </div>
+    <h1>
+      {{
+        variant === "register"
+          ? $t("auth.registerTitle")
+          : $t("auth.loginTitle")
+      }}
+    </h1>
     <div className="container">
       <v-form @submit.prevent>
         <v-text-field
+          class="input"
           v-if="variant === 'register'"
           v-model="firstName"
           :rules="[validateRequired(firstName, 'First name')]"
-          label="First name"
+          :label="$t('auth.firstName')"
         ></v-text-field>
         <v-text-field
+          class="input"
           v-if="variant === 'register'"
           v-model="lastName"
           :rules="[validateRequired(lastName, 'Last name')]"
-          label="Last name"
+          :label="$t('auth.lastName')"
         ></v-text-field>
         <v-text-field
+          class="input"
           v-model="email"
           :rules="[validateRequired(email, 'Email'), validateEmail(email)]"
-          label="Email"
+          :label="$t('auth.email')"
         ></v-text-field>
         <v-text-field
+          class="input"
           v-model="password"
           :rules="[
             validateRequired(password, 'Password'),
             validatePassword(password),
           ]"
-          label="Password"
+          :label="$t('auth.password')"
           type="password"
         ></v-text-field>
         <div class="switch-variant" v-if="variant === 'login'">
-          You don't have an account yet?
-          <NuxtLink to="/auth?variant=register">Create an account</NuxtLink>
+          {{ $t("auth.dontHaveAccount") }}
+          <NuxtLink to="/auth?variant=register">{{
+            $t("auth.login")
+          }}</NuxtLink>
         </div>
         <div class="switch-variant" v-else>
-          Do you already have an account?
-          <NuxtLink to="/auth?variant=login">Login</NuxtLink>
+          {{ $t("auth.alreadyHaveAccount") }}
+          <NuxtLink to="/auth?variant=login">{{
+            $t("auth.register")
+          }}</NuxtLink>
         </div>
         <v-btn class="mt-2" type="submit" block>{{
-          variant === "register" ? "Zarejestruj się" : "Zaloguj się"
+          variant === "register" ? $t("auth.register") : $t("auth.login")
         }}</v-btn>
       </v-form>
     </div>
@@ -90,6 +107,10 @@ watch(
   align-items: center;
   gap: 1rem;
 
+  .input {
+    width: 20rem;
+  }
+
   .back-button {
     position: absolute;
     top: 1rem;
@@ -99,6 +120,8 @@ watch(
     }
   }
   .theme-button {
+    display: flex;
+    gap: 0.5rem;
     position: absolute;
     top: 1rem;
     right: 1rem;
@@ -107,15 +130,13 @@ watch(
   .h1 {
     text-align: center;
   }
-  .container {
-    width: 20%;
-
-    .switch-variant {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-bottom: 10px;
-    }
+  .switch-variant {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    margin-bottom: 10px;
   }
 }
 </style>
