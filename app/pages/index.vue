@@ -30,7 +30,7 @@
               <v-btn to="/auth?variant=register">
                 {{ $t("auth.register") }}</v-btn
               >
-              <div>lub</div>
+              <div>{{ $t("landingPage.or") }}</div>
               <v-btn to="/auth?variant=login"> {{ $t("auth.login") }} </v-btn>
             </div>
           </v-col>

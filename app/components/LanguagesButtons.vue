@@ -1,12 +1,12 @@
 <template>
   <div v-for="(language, index) in languages" :key="index">
-    <v-btn icon @click="setLocale(language)" class="theme-switch">
+    <v-btn icon @click="toggleLanguage(language)" class="theme-switch">
       <img :src="languageImages[language]" :alt="'Flag of ' + language" />
     </v-btn>
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import pl from "~/assets/pl.svg";
 import en from "~/assets/en.svg";
 const languages = ["pl", "en"];
@@ -17,6 +17,11 @@ const languageImages = {
   pl,
   en,
 };
+
+function toggleLanguage(language: string) {
+  setLocale(language);
+  localStorage.setItem("locale", language);
+}
 </script>
 
 <style lang="scss" scoped>
