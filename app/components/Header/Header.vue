@@ -10,7 +10,7 @@ import ChangeThemeButton from '../ChangeThemeButton.vue';
     <ChangeThemeButton />
   </v-app-bar>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 .title {
   text-transform: uppercase;
   letter-spacing: 2px;

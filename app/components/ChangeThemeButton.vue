@@ -30,7 +30,7 @@ function toggleTheme() {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .theme-switch {
   width: max-content;
   height: max-content;

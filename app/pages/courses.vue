@@ -63,7 +63,7 @@ const courses = ref([
   },
 ]);
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .container {
   width: 50%;
   h2 {
