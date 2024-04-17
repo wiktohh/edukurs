@@ -17,13 +17,6 @@ watch(
   }
 );
 
-watch(
-  () => theme.global.name.value,
-  (value) => {
-    darkMode.value = value === "dark";
-  }
-);
-
 function toggleTheme() {
   theme.global.name.value =
     theme.global.name.value === "light" ? "dark" : "light";
