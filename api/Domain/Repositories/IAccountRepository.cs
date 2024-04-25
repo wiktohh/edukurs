@@ -9,4 +9,7 @@ public interface IAccountRepository
         Task<User> GetByIdAsync(UserId id);
         Task<User> GetByEmailAsync(Email email);
         Task AddAsync(User user);
+        void UpdateAsync(User user);
+        void DeleteAsync(User user);
+        void RemoveUserFromRepository(UserRepository userRepository);
 }

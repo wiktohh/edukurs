@@ -1,7 +1,7 @@
 ﻿using Application.DTO;
 using MediatR;
 
-namespace Application.Query.UserQueries.GetUser;
+namespace Application.Query.UserQueries.GetUser.GetUserById;
 
 public class GetUserByIdQuery : IRequest<UserDto>
 {

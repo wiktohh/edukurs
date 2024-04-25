@@ -1,9 +1,20 @@
-﻿using Application.Command.RepositoryCommand.CreateRepository;
-using Application.Command.TicketCommands;
+﻿using Application.Command.Repositories.CreateRepository;
+using Application.Command.Repositories.RemoveRepository;
+using Application.Command.Repositories.RemoveUserFromRepo;
+using Application.Command.Repositories.UpdateRepository;
+using Application.Command.Tasks;
+using Application.Command.Tasks.CreateTask;
+using Application.Command.Tasks.RemoveTask;
+using Application.Command.Tasks.UpdateTask;
+using Application.Command.Tickets.RespondToTicket;
+using Application.Command.Tickets.SendTIcketCommand;
 using Application.DTO;
 using Application.DTO.Request;
 using Application.Query.RepoQueries;
+using Application.Query.RepoQueries.GetRepos;
 using Application.Query.TicketQueries;
+using Application.Query.TicketQueries.GetPendingTickets;
+using Application.Query.TicketQueries.GetRepoTickets;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +31,6 @@ public class RepositoryController : ControllerBase
     {
         _mediator = mediator;
     }
-    
     [HttpPost]
     [Authorize(Roles = "Teacher")]
     public async Task<IActionResult> CreateRepository([FromBody] CreateRepositoryRequest request)
@@ -56,72 +66,62 @@ public class RepositoryController : ControllerBase
         var repos = await _mediator.Send(query);
         return Ok(repos);
     }
-    [HttpPost("ticket")]
+
+    
+    [HttpPost("remove-user/{id}")]
     [Authorize]
-    public async Task<IActionResult> AddUserToRepo([FromBody] SendTicketRequest request)
+    public async Task<IActionResult> RemoveUserFromRepo([FromRoute]Guid id,[FromBody] Guid UserId)
     {
         if(User.Identity?.Name is null)
         {
             return NotFound();
         }
-        var id = Guid.NewGuid();
         var guid = Guid.Parse(User.Identity?.Name);
-        var command = new SendTicketCommand()
+        var command = new RemoveUserFromRepoCommand()
         {
-            RepositoryId = request.RepositoryId,
-            UserId = guid,
-            Id = id
+            RepositoryId = id,
+            UserId = UserId,
+            SenderId = guid
         };
         await _mediator.Send(command);
         return Ok();
     }
     
-    [HttpPut("ticket/{id}")]
-    [Authorize]
-    public async Task<IActionResult> RespondToTicket([FromRoute]Guid id,[FromBody] SendTicketResponse request)
+    
+    [HttpDelete("{id}")]
+    [Authorize (Roles = "Teacher")]
+    public async Task<IActionResult> DeleteRepository([FromRoute]Guid id)
     {
-        
         if(User.Identity?.Name is null)
         {
             return NotFound();
         }
         var guid = Guid.Parse(User.Identity?.Name);
-        
-        var command = new RespondToTicketCommand()
+        var command = new RemoveRepositoryCommand()
         {
-            UserId = guid,
-            TicketId = id,
-            Status = request.Status
+            Id = id,
+            SenderId = guid
         };
         await _mediator.Send(command);
         return Ok();
     }
     
-    [HttpGet("tickets")]
-    [Authorize(Roles = "Teacher")]
-    public async Task<IActionResult> GetPendingTickets()
+    [HttpPut("{id}")]
+    [Authorize (Roles = "Teacher")]
+    public async Task<IActionResult> UpdateRepository([FromRoute]Guid id,[FromBody] UpdateRepositoryRequest request)
     {
         if(User.Identity?.Name is null)
         {
             return NotFound();
         }
         var guid = Guid.Parse(User.Identity?.Name);
-        var query = new GetPendingTicketsQuery(){UserId = guid};
-        var tickets = await _mediator.Send(query);
-        return Ok(tickets);
-    }
-    
-    [HttpGet("tickets/{repId}")]
-    [Authorize(Roles = "Teacher")]
-    public async Task<IActionResult> GetPendingTickets(Guid repId)
-    {
-        if(User.Identity?.Name is null)
+        var command = new UpdateRepositoryCommand()
         {
-            return NotFound();
-        }
-        var guid = Guid.Parse(User.Identity?.Name);
-        var query = new GetRepoTicketsQuery(){UserId = guid, RepositoryId = repId};
-        var tickets = await _mediator.Send(query);
-        return Ok(tickets);
+            Id = id,
+            Name = request.Name,
+            SenderId = guid
+        };
+        await _mediator.Send(command);
+        return Ok();
     }
 }

@@ -7,7 +7,7 @@ using Domain.ValueObjects.User;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Command.TicketCommands;
+namespace Application.Command.Tickets.SendTIcketCommand;
 
 public class SendTicketCommandHandler : IRequestHandler<SendTicketCommand>
 {

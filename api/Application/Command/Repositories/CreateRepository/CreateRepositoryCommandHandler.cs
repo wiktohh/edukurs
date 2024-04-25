@@ -3,7 +3,7 @@ using Domain.Entities;
 using Domain.Repositories;
 using MediatR;
 
-namespace Application.Command.RepositoryCommand.CreateRepository;
+namespace Application.Command.Repositories.CreateRepository;
 
 public class CreateRepositoryCommandHandler : IRequestHandler<CreateRepositoryCommand>
 {

@@ -3,7 +3,7 @@ using Application.Exceptions;
 using Domain.Repositories;
 using MediatR;
 
-namespace Application.Query.UserQueries.GetUser;
+namespace Application.Query.UserQueries.GetUser.GetUserByEmail;
 
 public class GetUserByEmailQueryHandler : IRequestHandler<GetUserByEmailQuery,UserDto>
 {

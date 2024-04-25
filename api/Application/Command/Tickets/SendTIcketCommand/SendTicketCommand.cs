@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Application.Command.TicketCommands;
+namespace Application.Command.Tickets.SendTIcketCommand;
 
 public class SendTicketCommand : IRequest
 {

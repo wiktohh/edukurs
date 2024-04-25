@@ -1,3 +1,3 @@
 ﻿namespace Application.DTO;
 
-public record TicketDto(Guid RepositoryId, Guid UserId,string Status);
+public record TicketDto(Guid Id,Guid RepositoryId, Guid UserId,string Status);

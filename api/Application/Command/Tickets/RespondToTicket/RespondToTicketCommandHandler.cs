@@ -3,7 +3,7 @@ using Domain.Entities;
 using Domain.Repositories;
 using MediatR;
 
-namespace Application.Command.TicketCommands;
+namespace Application.Command.Tickets.RespondToTicket;
 
 public class RespondToTicketCommandHandler : IRequestHandler<RespondToTicketCommand>
 {
@@ -41,7 +41,7 @@ public class RespondToTicketCommandHandler : IRequestHandler<RespondToTicketComm
 
         if (repository.OwnerId != request.UserId)
         {
-            throw new Exception("tak nie powinno byc");
+            throw new UnauthorazedException("User is not the owner of the repository");
         }
         var user = await _userRepository.GetByIdAsync(ticket.UserId);
         if (user is null)

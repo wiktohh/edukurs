@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Application.Command.RepositoryCommand.CreateRepository;
+namespace Application.Command.Repositories.CreateRepository;
 
 public class CreateRepositoryCommand : IRequest
 {
