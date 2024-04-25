@@ -15,6 +15,8 @@ public static class Extensions
         services.AddScoped<IRepRepository, RepRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<ITicketRepository, TicketRepository>();
+        services.AddScoped<ISubmittedTaskRepository, SubmittedTaskRepository>();
+        services.AddScoped<ITaskRepository, TaskRepository>();
         services.Configure<PostgresOptions>(configuration.GetRequiredSection(OptionsSectionName));
         var postgresOptions = configuration.GetConfiguration<PostgresOptions>(OptionsSectionName);
         services.AddDbContext<DataContext>(options =>
