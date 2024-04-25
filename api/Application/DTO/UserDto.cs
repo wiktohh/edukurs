@@ -2,4 +2,4 @@
 
 namespace Application.DTO;
 
-public record UserDto(string Email, string FirstName, string LastName, string Role);
+public record UserDto(Guid Id,string Email, string FirstName, string LastName, string Role);

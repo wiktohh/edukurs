@@ -23,4 +23,9 @@ public class User
         Password = password;
         Role = role;
     }
+    
+    public void UpdateRole(Role role)
+    {
+        Role = role;
+    }
 }

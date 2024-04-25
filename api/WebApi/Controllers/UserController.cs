@@ -1,8 +1,13 @@
-﻿using Application.Command.UserCommands.SignInUser;
+﻿using Application.Command.UserCommands.DeleteUser;
+using Application.Command.UserCommands.SignInUser;
 using Application.Command.UserCommands.SignUpUser;
+using Application.Command.UserCommands.UpdateUser;
 using Application.DTO;
 using Application.DTO.Request;
 using Application.Query.UserQueries.GetUser;
+using Application.Query.UserQueries.GetUser.GetAllUsers;
+using Application.Query.UserQueries.GetUser.GetUserByEmail;
+using Application.Query.UserQueries.GetUser.GetUserById;
 using Application.Security;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -81,6 +86,37 @@ public class UserController : ControllerBase
         var query = new GetUserByIdQuery(){Id = guid};
         var user = await _mediator.Send(query);
         return Ok(user);
+    }
+    
+    [HttpGet("all")]
+    [Authorize(Roles = "Teacher")]
+    public async Task<ActionResult<ICollection<UserDto>>> GetAll()
+    {
+        var query = new GetAllUsersQuery();
+        var users = await _mediator.Send(query);
+        return Ok(users);
+    }
+    
+    [HttpPut("{id}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Update(Guid id, [FromBody] string Role)
+    {
+        var command = new UpdateUserCommand()
+        {
+            Id = id,
+            Role = Role
+        };
+        await _mediator.Send(command);
+        return Ok();
+    }
+    
+    [HttpDelete("{id}")]
+    [Authorize]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var command = new DeleteUserCommand(){Id = id};
+        await _mediator.Send(command);
+        return Ok();
     }
     
 }
