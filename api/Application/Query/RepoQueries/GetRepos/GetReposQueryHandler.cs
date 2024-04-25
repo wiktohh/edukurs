@@ -4,7 +4,7 @@ using Domain.ValueObjects.User;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Query.RepoQueries;
+namespace Application.Query.RepoQueries.GetRepos;
 
 public class GetReposQueryHandler : IRequestHandler<GetReposQuery,ICollection<RepositoryDto>>
 {

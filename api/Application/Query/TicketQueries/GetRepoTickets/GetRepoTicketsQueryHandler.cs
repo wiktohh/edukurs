@@ -1,11 +1,10 @@
 ﻿using Application.DTO;
 using Domain.Repositories;
 using Domain.ValueObjects.Repository;
-using Domain.ValueObjects.User;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Query.TicketQueries;
+namespace Application.Query.TicketQueries.GetRepoTickets;
 
 public class GetRepoTicketsQueryHandler : IRequestHandler<GetRepoTicketsQuery, ICollection<TicketDto>>
 {

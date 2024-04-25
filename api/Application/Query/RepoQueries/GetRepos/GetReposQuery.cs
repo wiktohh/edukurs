@@ -1,7 +1,7 @@
 ﻿using Application.DTO;
 using MediatR;
 
-namespace Application.Query.RepoQueries;
+namespace Application.Query.RepoQueries.GetRepos;
 
 public class GetReposQuery : IRequest<ICollection<RepositoryDto>>
 {
