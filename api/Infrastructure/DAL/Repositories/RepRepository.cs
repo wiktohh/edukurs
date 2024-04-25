@@ -15,6 +15,10 @@ public class RepRepository : IRepRepository
     }
     
     public IQueryable<Repository> GetAllRepositoriesAsync() => _context.Repositories.Include(x=>x.Users).ThenInclude(x=>x.User).AsQueryable();
+    public IQueryable<UserRepository> GetAllUsersRepositoriesAsync()
+    {
+        return _context.UserRepository;
+    }
 
     public async Task<Repository> GetRepositoryByIdAsync(RepositoryId Id)=> await _context.Repositories.Include(x=>x.Users).ThenInclude(x=>x.User).SingleOrDefaultAsync(x => x.Id == Id);
 
@@ -22,5 +26,15 @@ public class RepRepository : IRepRepository
     public async Task AddUserToRepositoryAsync(UserRepository userRepository)
     {
         await _context.UserRepository.AddAsync(userRepository);
+    }
+
+    public void UpdateRepository(Repository repository)
+    {
+        _context.Repositories.Update(repository);
+    }
+
+    public void RemoveRepository(Repository repository)
+    {
+        _context.Repositories.Remove(repository);
     }
 }
