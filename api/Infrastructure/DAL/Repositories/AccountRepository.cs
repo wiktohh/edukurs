@@ -33,4 +33,19 @@ public class AccountRepository : IAccountRepository
     {
         await _dbContext.Users.AddAsync(user);
     }
+
+    public void UpdateAsync(User user)
+    {
+        _dbContext.Users.Update(user);
+    }
+
+    public void DeleteAsync(User user)
+    {
+        _dbContext.Users.Remove(user);
+    }
+    
+    public void RemoveUserFromRepository(UserRepository userRepository)
+    {
+        _dbContext.UserRepository.Remove(userRepository);
+    } 
 }
