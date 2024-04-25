@@ -14,6 +14,16 @@ public class ExceptionMiddleware : IMiddleware
         {
             await next(context);
         }
+        catch (UnauthorazedException ex)
+        {
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+
+            var response = new { message = ex.Message, stackTrace = ex.StackTrace };
+            var payload = JsonConvert.SerializeObject(response);
+
+            await context.Response.WriteAsync(payload);
+        }
         catch (NotFoundException ex)
         {
             context.Response.ContentType = "application/json";

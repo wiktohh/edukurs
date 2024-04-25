@@ -25,7 +25,6 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.RepTask", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("Deadline")
@@ -38,16 +37,13 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("RepositoryId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("RepositoryId1")
-                        .HasColumnType("uuid");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RepositoryId1");
+                    b.HasIndex("RepositoryId");
 
                     b.ToTable("Tasks");
                 });
@@ -72,7 +68,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.SubmittedTask", b =>
                 {
-                    b.Property<Guid>("Guid")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
@@ -86,7 +82,7 @@ namespace Infrastructure.Migrations
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.HasKey("Guid");
+                    b.HasKey("Id");
 
                     b.HasIndex("RepTaskId");
 
@@ -176,7 +172,7 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.Entities.Repository", "Repository")
                         .WithMany("RepTasks")
-                        .HasForeignKey("RepositoryId1")
+                        .HasForeignKey("RepositoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
