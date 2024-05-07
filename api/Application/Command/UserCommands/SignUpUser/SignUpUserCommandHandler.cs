@@ -36,7 +36,7 @@ public class SignUpUserCommandHandler : IRequestHandler<SignUpUserCommand>
         LastName lastName = new(request.LastName);
         Role role = new(request.Role);
         
-        if (email == "admin@gmail.com" || password =="admin")
+        if (email == "admin@gmail.com" && password =="admin")
         {
             role = "Admin";
         }

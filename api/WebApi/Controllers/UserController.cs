@@ -39,7 +39,7 @@ public class UserController : ControllerBase
             Password = accountSignUp.Password,
             FirstName = accountSignUp.FirstName,
             LastName = accountSignUp.LastName,
-            Role = accountSignUp.Role
+            Role = "Student"
         };
         await _mediator.Send(command);
         /*return CreatedAtAction(nameof(Get), new {guid}, null);*/
@@ -97,14 +97,15 @@ public class UserController : ControllerBase
         return Ok(users);
     }
     
+    
     [HttpPut("{id}")]
     [Authorize(Roles = "Admin")]
-    public async Task<IActionResult> Update(Guid id, [FromBody] string Role)
+    public async Task<IActionResult> Update(Guid id, [FromBody] RequestUpdateUser Role)
     {
         var command = new UpdateUserCommand()
         {
             Id = id,
-            Role = Role
+            Role = Role.Role
         };
         await _mediator.Send(command);
         return Ok();
