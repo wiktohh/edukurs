@@ -1,4 +1,6 @@
 ﻿using Domain.Entities;
+using Domain.ValueObjects.RepTask;
+using Domain.ValueObjects.SubmittedTask;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,10 +12,11 @@ public class ReportsConfiguration : IEntityTypeConfiguration<SubmittedTask>
     {
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id)
+            .HasConversion(x => x.Value, x => new ReportId(x))
+            .IsRequired();
+        builder.Property(x => x.Path)
             .IsRequired();
         builder.Property(x => x.RepTaskId)
-            .IsRequired();
-        builder.Property(x => x.Status)
             .IsRequired();
         builder.HasOne(x => x.RepTask)
             .WithMany(x=>x.SubmittedTasks)

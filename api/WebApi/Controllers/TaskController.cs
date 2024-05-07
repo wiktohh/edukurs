@@ -86,25 +86,7 @@ public class TaskController : ControllerBase
         return Accepted();
     }
     
-    [HttpPost("send-ticket")]
-    [Authorize]
-    public async Task<IActionResult> AddUserToRepo([FromBody] SendTicketRequest request)
-    {
-        if(User.Identity?.Name is null)
-        {
-            return NotFound();
-        }
-        var id = Guid.NewGuid();
-        var guid = Guid.Parse(User.Identity?.Name);
-        var command = new SendTicketCommand()
-        {
-            RepositoryId = request.RepositoryId,
-            UserId = guid,
-            Id = id
-        };
-        await _mediator.Send(command);
-        return Ok();
-    }
+
     
     [HttpPost("repository/{id}")]
     [Authorize(Roles = "Teacher")]
@@ -128,6 +110,7 @@ public class TaskController : ControllerBase
             UserId = guid
         };
         await _mediator.Send(command);
-        return CreatedAtRoute("GetTask", new { id = taskID }, null);
+        return Created();
+        /*return CreatedAtRoute($"Task/{taskID}", new { id = taskID }, null);*/
     }
 }

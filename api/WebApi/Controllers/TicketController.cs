@@ -1,4 +1,5 @@
 ﻿using Application.Command.Tickets.RespondToTicket;
+using Application.Command.Tickets.SendTIcketCommand;
 using Application.DTO.Request;
 using Application.Query.TicketQueries.GetPendingTickets;
 using Application.Query.TicketQueries.GetRepoTickets;
@@ -64,6 +65,26 @@ public class TicketController : ControllerBase
             UserId = guid,
             TicketId = id,
             Status = request.Status
+        };
+        await _mediator.Send(command);
+        return Ok();
+    }
+    
+    [HttpPost("send-ticket")]
+    [Authorize]
+    public async Task<IActionResult> AddUserToRepo([FromBody] SendTicketRequest request)
+    {
+        if(User.Identity?.Name is null)
+        {
+            return NotFound();
+        }
+        var id = Guid.NewGuid();
+        var guid = Guid.Parse(User.Identity?.Name);
+        var command = new SendTicketCommand()
+        {
+            RepositoryId = request.RepositoryId,
+            UserId = guid,
+            Id = id
         };
         await _mediator.Send(command);
         return Ok();

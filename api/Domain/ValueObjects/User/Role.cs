@@ -7,7 +7,8 @@ public record Role
     public static IEnumerable<string> AvailableRoles => new List<string>
     {
         "Teacher",
-        "Student"
+        "Student",
+        "Admin"
     };
 
     public string Value { get; }

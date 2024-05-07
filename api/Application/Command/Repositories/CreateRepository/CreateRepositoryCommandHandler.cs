@@ -20,6 +20,12 @@ public class CreateRepositoryCommandHandler : IRequestHandler<CreateRepositoryCo
     
     public async Task Handle(CreateRepositoryCommand request, CancellationToken cancellationToken)
     {
+        var repo = _repository.GetAllRepositoriesAsync().FirstOrDefault(x=>x.Name== request.Name);
+        if (repo is not null)
+        {
+            throw new BadRequestException("Repository with this name already exists");
+        }
+        
         var Repo = new Repository(request.Id,request.Name , request.OwnerId);
         var user = await _accountRepository.GetByIdAsync(request.OwnerId);
         if (user is null)
@@ -29,5 +35,6 @@ public class CreateRepositoryCommandHandler : IRequestHandler<CreateRepositoryCo
         Repo.Users.Add(new UserRepository(Repo.Id,user.Id,true));
         await _repository.AddRepositoryAsync(Repo);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+        Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Upload\\files", Repo.Name.ToString()));
     }
 }
