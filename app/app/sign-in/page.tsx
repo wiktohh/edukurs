@@ -5,7 +5,7 @@ import Input from "../components/Input";
 const SignInPage = () => {
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center">
-      <h2 className="text-2xl mb-4">Zaloguj się do Edukurs</h2>
+      <h2 className="text-3xl mb-4">Zaloguj się do Edukurs</h2>
       <form className="w-1/6 flex flex-col">
         <Input type="email" placeholder="Email" />
         <Input type="password" placeholder="Hasło" />

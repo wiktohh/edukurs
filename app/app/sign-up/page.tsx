@@ -5,7 +5,7 @@ import SubmitButton from "../components/SubmitButton";
 const SignUpPage = () => {
   return (
     <div className="w-screen h-screen flex flex-col justify-center items-center">
-      <h1 className="text-4xl mb-4">Zarejestruj się do Edukurs</h1>
+      <h1 className="text-3xl mb-4">Zarejestruj się do Edukurs</h1>
       <form className="w-1/5 flex flex-col">
         <div className="w-100 flex gap-2">
           <Input type="text" placeholder="Imię" halfWidth={true} />
@@ -14,7 +14,7 @@ const SignUpPage = () => {
         <Input type="email" placeholder="Email" />
         <Input type="password" placeholder="Hasło" />
         <div className="text-center mb-2">
-          Masz już konto? <Link href="sign-up">Zaloguj się</Link>
+          Masz już konto? <Link href="sign-in">Zaloguj się</Link>
         </div>
         <SubmitButton content="Zarejestruj" />
       </form>
