@@ -1,14 +1,14 @@
+import { FaHome, FaListAlt } from "react-icons/fa";
+
 export const links = [
   {
     title: "Home",
-    path: "/",
-  },
-  {
-    title: "My courses",
-    path: "/my-courses",
+    path: "/home",
+    icon: FaHome,
   },
   {
     title: "All courses",
     path: "/all-courses",
+    icon: FaListAlt,
   },
 ];
