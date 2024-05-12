@@ -15,7 +15,7 @@ const Sidebar = () => {
       </div>
       <div className="w-3/4 h-full py-4 flex flex-col justify-between">
         <NavLinks />
-        <button className="uppercase text-gray-600 hover:text-black text-left mt-4 flex gap-2 items-center">
+        <button className="uppercase text-gray-600 hover:text-red-500 text-left mt-4 flex gap-2 items-center">
           <FaSignOutAlt className="text-2xl" /> Wyloguj się
         </button>
       </div>
