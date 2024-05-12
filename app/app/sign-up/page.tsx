@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Input from "../components/Input";
 import SubmitButton from "../components/SubmitButton";
 
@@ -12,6 +13,9 @@ const SignUpPage = () => {
         </div>
         <Input type="email" placeholder="Email" />
         <Input type="password" placeholder="Hasło" />
+        <div className="text-center mb-2">
+          Masz już konto? <Link href="sign-up">Zaloguj się</Link>
+        </div>
         <SubmitButton content="Zarejestruj" />
       </form>
     </div>
