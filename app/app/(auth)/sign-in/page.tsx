@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
-import SubmitButton from "@/app/components/SubmitButton";
-import Input from "@/app/components/Input";
+import SubmitButton from "@/components/SubmitButton";
+import Input from "@/components/Input";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import LoadingSpinner from "@/app/components/LoadingSpinner";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 type UserData = {
   email: string;
@@ -64,9 +64,9 @@ const SignInPage = () => {
         </div>
         <SubmitButton>
           {loading ? (
-            <LoadingSpinner width={4} height={4} />
+            <LoadingSpinner width={1.25} height={1.25} />
           ) : (
-            "Zarejestruj się"
+            "Zaloguj się"
           )}
         </SubmitButton>
       </form>

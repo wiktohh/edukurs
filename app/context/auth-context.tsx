@@ -62,7 +62,7 @@ export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
       setLoaded(true);
     };
     getUser();
-  });
+  }, []);
 
   const values: AuthContextProps = {
     user,

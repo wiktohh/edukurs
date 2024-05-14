@@ -1,5 +1,5 @@
 "use client";
-import { useAuth } from "@/app/context/auth-context";
+import { useAuth } from "@/context/auth-context";
 import NavLinks from "./NavLinks";
 import { FaSignOutAlt } from "react-icons/fa";
 

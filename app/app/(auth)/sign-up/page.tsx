@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
-import Input from "../../components/Input";
-import SubmitButton from "../../components/SubmitButton";
+import Input from "../../../components/Input";
+import SubmitButton from "../../../components/SubmitButton";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import LoadingSpinner from "@/app/components/LoadingSpinner";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 type UserData = {
   firstName: string;
