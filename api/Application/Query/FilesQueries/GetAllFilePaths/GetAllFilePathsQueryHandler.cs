@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Query.FilesQueries.GetAllFilePaths;
 
-public class GetAllFilePathsQueryHandler : IRequestHandler<GetAllFilePathsQuery, string[]>
+internal class GetAllFilePathsQueryHandler : IRequestHandler<GetAllFilePathsQuery, string[]>
 {
     private readonly ISubmittedTaskRepository _repository;
 

@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Command.Repositories.UpdateRepository;
 
-public class UpdateRepositoryCommandHandler : IRequestHandler<UpdateRepositoryCommand>
+internal class UpdateRepositoryCommandHandler : IRequestHandler<UpdateRepositoryCommand>
 {
     private readonly IAccountRepository _accountRepository;
     private readonly IRepRepository _repRepository;

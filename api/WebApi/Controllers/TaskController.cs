@@ -6,6 +6,7 @@ using Application.DTO.Request;
 using Application.Query.TasksQueries.GetAllTasks;
 using Application.Query.TasksQueries.GetTaskById;
 using Application.Query.TasksQueries.GetTasksFromRepo;
+using Application.Query.TasksQueries.StatsForTask;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -112,5 +113,21 @@ public class TaskController : ControllerBase
         await _mediator.Send(command);
         return Created();
         /*return CreatedAtRoute($"Task/{taskID}", new { id = taskID }, null);*/
+    }
+    
+    [HttpGet("users/{taskId}")]
+    [Authorize(Roles="Teacher")]
+    public async Task<IActionResult> GetUsersWhoSendTask(Guid taskId)
+    {
+        
+        if(User.Identity?.Name is null)
+        {
+            return NotFound();
+        }
+        var guid = Guid.Parse(User.Identity?.Name);
+        
+        var query = new StatsForTaskQuery(){TaskId = taskId, UserId = guid};
+        var tasks = await _mediator.Send(query);
+        return Ok(tasks);
     }
 }

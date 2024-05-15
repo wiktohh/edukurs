@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Query.FilesQueries.GetAllFilesFromRepository;
 
-public class GetAllFilesFromRepositoryQueryHandler : IRequestHandler<GetAllFilesFromRepositoryQuery, IEnumerable<ReportDto>>
+internal class GetAllFilesFromRepositoryQueryHandler : IRequestHandler<GetAllFilesFromRepositoryQuery, IEnumerable<ReportDto>>
 {
     private readonly IRepRepository _repository;
     private readonly ISubmittedTaskRepository _submittedTaskRepository;

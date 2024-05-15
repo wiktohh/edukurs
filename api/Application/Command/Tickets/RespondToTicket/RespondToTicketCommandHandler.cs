@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Command.Tickets.RespondToTicket;
 
-public class RespondToTicketCommandHandler : IRequestHandler<RespondToTicketCommand>
+internal class RespondToTicketCommandHandler : IRequestHandler<RespondToTicketCommand>
 {
     private readonly ITicketRepository _ticketRepository;
     private readonly IUnitOfWork _unitOfWork;

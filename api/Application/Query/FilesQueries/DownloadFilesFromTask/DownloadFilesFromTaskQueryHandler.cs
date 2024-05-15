@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Query.FilesQueries.DownloadFilesFromTask;
 
-public class DownloadFilesFromTaskQueryHandler : IRequestHandler<DownloadFilesFromTaskQuery,FileDto>
+internal class DownloadFilesFromTaskQueryHandler : IRequestHandler<DownloadFilesFromTaskQuery,FileDto>
 {
     private readonly ITaskRepository _taskRepository;
     private readonly ISubmittedTaskRepository _submittedTaskRepository;

@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Command.UserCommands.SignInUser;
 
-public class SignInUserCommandHandler : IRequestHandler<SignInUserCommand>
+internal class SignInUserCommandHandler : IRequestHandler<SignInUserCommand>
 {
     private readonly IAccountRepository _accountRepository;
     private readonly IPasswordManager _passwordManager;

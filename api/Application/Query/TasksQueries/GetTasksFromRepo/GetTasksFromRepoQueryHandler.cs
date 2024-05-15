@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Query.TasksQueries.GetTasksFromRepo;
 
-public class GetTasksFromRepoQueryHandler : IRequestHandler<GetTasksFromRepoQuery, IEnumerable<TaskDto>>
+internal class GetTasksFromRepoQueryHandler : IRequestHandler<GetTasksFromRepoQuery, IEnumerable<TaskDto>>
 {
     private readonly ITaskRepository _repository;
 

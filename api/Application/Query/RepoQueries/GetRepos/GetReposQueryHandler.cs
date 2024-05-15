@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Query.RepoQueries.GetRepos;
 
-public class GetReposQueryHandler : IRequestHandler<GetReposQuery,ICollection<RepositoryDto>>
+internal class GetReposQueryHandler : IRequestHandler<GetReposQuery,ICollection<RepositoryDto>>
 {
     private readonly IRepRepository _repository;
 

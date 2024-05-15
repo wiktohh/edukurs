@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Query.TicketQueries.GetRepoTickets;
 
-public class GetRepoTicketsQueryHandler : IRequestHandler<GetRepoTicketsQuery, ICollection<TicketDto>>
+internal class GetRepoTicketsQueryHandler : IRequestHandler<GetRepoTicketsQuery, ICollection<TicketDto>>
 {
     private readonly ITicketRepository _ticketRepository;
     private readonly IRepRepository _repositoryRepository;

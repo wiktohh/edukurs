@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Query.TicketQueries.GetPendingTickets;
 
-public class GetPendingTicketsQueryHandler : IRequestHandler<GetPendingTicketsQuery,ICollection<TicketDto>>
+internal class GetPendingTicketsQueryHandler : IRequestHandler<GetPendingTicketsQuery,ICollection<TicketDto>>
 {
     private readonly ITicketRepository _ticketRepository;
 

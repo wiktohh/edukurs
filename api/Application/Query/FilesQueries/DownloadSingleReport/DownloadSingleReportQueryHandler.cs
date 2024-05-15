@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Query.FilesQueries.DownloadSingleReport;
 
-public class DownloadSingleReportQueryHandler : IRequestHandler<DownloadSingleReportQuery,FileDto>
+internal class DownloadSingleReportQueryHandler : IRequestHandler<DownloadSingleReportQuery,FileDto>
 {
     private readonly ITaskRepository _taskRepository;
     private readonly ISubmittedTaskRepository _submittedTaskRepository;

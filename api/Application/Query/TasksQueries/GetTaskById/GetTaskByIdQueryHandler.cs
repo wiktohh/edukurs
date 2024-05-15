@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Query.TasksQueries.GetTaskById;
 
-public class GetTaskByIdQueryHandler : IRequestHandler<GetTaskByIdQuery, TaskDto>
+internal class GetTaskByIdQueryHandler : IRequestHandler<GetTaskByIdQuery, TaskDto>
 {
     private readonly ITaskRepository _repository;
 

@@ -89,7 +89,7 @@ public class UserController : ControllerBase
     }
     
     [HttpGet("all")]
-    [Authorize(Roles = "Teacher")]
+    [Authorize(Roles = "Teacher,Admin")]
     public async Task<ActionResult<ICollection<UserDto>>> GetAll()
     {
         var query = new GetAllUsersQuery();

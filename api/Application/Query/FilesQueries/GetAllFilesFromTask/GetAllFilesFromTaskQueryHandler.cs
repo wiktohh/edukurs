@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Query.FilesQueries.GetAllFilesFromTask;
 
-public class GetAllFilesFromTaskQueryHandler : IRequestHandler<GetAllFilesFromTaskQuery, IEnumerable<ReportDto>>
+internal class GetAllFilesFromTaskQueryHandler : IRequestHandler<GetAllFilesFromTaskQuery, IEnumerable<ReportDto>>
 {
     private readonly IRepRepository _repository;
     private readonly ISubmittedTaskRepository _submittedTaskRepository;

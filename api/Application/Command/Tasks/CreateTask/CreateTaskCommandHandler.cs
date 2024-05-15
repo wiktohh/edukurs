@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Application.Command.Tasks.CreateTask;
 
-public class CreateTaskCommandHandler : IRequestHandler<CreateTaskCommand>
+internal class CreateTaskCommandHandler : IRequestHandler<CreateTaskCommand>
 {
     private readonly ITaskRepository _taskRepository;
     private readonly IRepRepository _repRepository;

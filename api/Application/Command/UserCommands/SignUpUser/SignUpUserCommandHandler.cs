@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Application.Command.UserCommands.SignUpUser;
 
-public class SignUpUserCommandHandler : IRequestHandler<SignUpUserCommand>
+internal class SignUpUserCommandHandler : IRequestHandler<SignUpUserCommand>
 {
     private readonly IAccountRepository _accountRepository;
     private readonly IUnitOfWork _unitOfWork;

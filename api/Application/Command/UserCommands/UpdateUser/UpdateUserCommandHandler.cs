@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Command.UserCommands.UpdateUser;
 
-public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
+internal class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
 {
     private readonly IAccountRepository _repository;
     private readonly IUnitOfWork _unitOfWork;

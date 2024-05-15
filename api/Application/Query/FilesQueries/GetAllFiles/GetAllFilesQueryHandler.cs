@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Query.FilesQueries.GetAllFiles;
 
-public class GetAllFilesQueryHandler : IRequestHandler<GetAllFilesQuery, IEnumerable<ReportDto>>
+internal class GetAllFilesQueryHandler : IRequestHandler<GetAllFilesQuery, IEnumerable<ReportDto>>
 {
     private readonly ISubmittedTaskRepository _repository;
 

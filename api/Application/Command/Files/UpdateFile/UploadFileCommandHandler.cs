@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Application.Command.Files.UpdateFile;
 
-public class UploadFileCommandHandler : IRequestHandler<UploadFileCommand>
+internal class UploadFileCommandHandler : IRequestHandler<UploadFileCommand>
 {
     private async Task<string> WriteFile(IFormFile file,User user,RepTask task,Repository repository)
     {
@@ -15,7 +15,7 @@ public class UploadFileCommandHandler : IRequestHandler<UploadFileCommand>
         try
         {
             var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
-            filename = $"{user.FirstName}_{user.LastName}{extension}";
+            filename = $"{user.FirstName}_{user.LastName}_{Guid.NewGuid().ToString().Substring(0,7)}{extension}";
             var taskdir = string.Join('_', task.Title.ToString().Split(' '));
             var repdir = string.Join('_', repository.Name.ToString().Split(' '));
             pathBuilt = Path.Combine(Directory.GetCurrentDirectory(), "Upload\\files",repdir,taskdir);

@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.Query.UserQueries.GetUser.GetAllUsers;
 
-public class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery,ICollection<UserDto>>
+internal class GetAllUsersQueryHandler : IRequestHandler<GetAllUsersQuery,ICollection<UserDto>>
 {
     private readonly IAccountRepository _repository;
 

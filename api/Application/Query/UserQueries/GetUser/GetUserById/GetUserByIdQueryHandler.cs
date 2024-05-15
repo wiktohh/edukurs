@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Query.UserQueries.GetUser.GetUserById;
 
-public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery,UserDto>
+internal class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery,UserDto>
 {
     private readonly IAccountRepository _accountRepository;
 

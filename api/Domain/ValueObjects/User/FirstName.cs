@@ -1,14 +1,16 @@
-﻿using Domain.Exceptions;
+﻿using System.Text.RegularExpressions;
+using Domain.Exceptions;
 
 namespace Domain.ValueObjects.User;
 
 public record FirstName
 {
     public string Value { get; init; }
-
+    Regex regex = new Regex(@"^[a-zA-Z]+$");
     public FirstName(string value)
     {
-        if ( string.IsNullOrWhiteSpace(value) || value.Length < 2 || value.Length > 50)
+        value = value.Trim();
+        if (string.IsNullOrWhiteSpace(value) || value.Length < 2 || value.Length > 50 || !regex.IsMatch(value))
         {
             throw new InvalidFirstNameException(value);
         }

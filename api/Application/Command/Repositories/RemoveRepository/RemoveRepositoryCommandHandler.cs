@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Command.Repositories.RemoveRepository;
 
-public class RemoveRepositoryCommandHandler : IRequestHandler<RemoveRepositoryCommand>
+internal class RemoveRepositoryCommandHandler : IRequestHandler<RemoveRepositoryCommand>
 {
     private readonly IAccountRepository _accountRepository;
     private readonly IRepRepository _repRepository;

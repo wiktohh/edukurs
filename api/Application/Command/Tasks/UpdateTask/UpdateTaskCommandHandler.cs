@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Command.Tasks.UpdateTask;
 
-public class UpdateTaskCommandHandler : IRequestHandler<UpdateTaskCommand>
+internal class UpdateTaskCommandHandler : IRequestHandler<UpdateTaskCommand>
 {
     private readonly ITaskRepository _taskRepository;
     private readonly IRepRepository _repRepository;

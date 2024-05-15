@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.Command.Tasks.RemoveTask;
 
-public class RemoveTaskCommandHandler : IRequestHandler<RemoveTaskCommand>
+internal class RemoveTaskCommandHandler : IRequestHandler<RemoveTaskCommand>
 {
     
     private readonly ITaskRepository _taskRepository;

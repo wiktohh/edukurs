@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Command.Repositories.CreateRepository;
 
-public class CreateRepositoryCommandHandler : IRequestHandler<CreateRepositoryCommand>
+internal class CreateRepositoryCommandHandler : IRequestHandler<CreateRepositoryCommand>
 {
     private readonly IRepRepository _repository;
     private readonly IUnitOfWork _unitOfWork;

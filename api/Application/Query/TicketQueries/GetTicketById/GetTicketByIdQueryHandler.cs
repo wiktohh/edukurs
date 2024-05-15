@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Query.TicketQueries.GetTicketById;
 
-public class GetTicketByIdQueryHandler : IRequestHandler<GetTicketByIdQuery, TicketDto>
+internal class GetTicketByIdQueryHandler : IRequestHandler<GetTicketByIdQuery, TicketDto>
 {
     private readonly ITicketRepository _repository;
 

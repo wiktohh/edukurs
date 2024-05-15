@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Command.Tickets.SendTIcketCommand;
 
-public class SendTicketCommandHandler : IRequestHandler<SendTicketCommand>
+internal class SendTicketCommandHandler : IRequestHandler<SendTicketCommand>
 {
     private readonly ITicketRepository _ticketRepository;
     private readonly IUnitOfWork _unitOfWork;

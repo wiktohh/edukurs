@@ -53,7 +53,6 @@ public class RepositoryController : ControllerBase
     }
     
     [HttpGet]
-    [Authorize]
     public async Task<IActionResult> GetRepos([FromQuery] RepoEnum repoEnum)
     {
         if(User.Identity?.Name is null)

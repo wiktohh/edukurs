@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Query.UserQueries.GetUser.GetUserByEmail;
 
-public class GetUserByEmailQueryHandler : IRequestHandler<GetUserByEmailQuery,UserDto>
+internal class GetUserByEmailQueryHandler : IRequestHandler<GetUserByEmailQuery,UserDto>
 {
     private readonly IAccountRepository _accountRepository;
 

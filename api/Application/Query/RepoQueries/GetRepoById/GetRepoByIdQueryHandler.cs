@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Application.Query.RepoQueries.GetRepoById;
 
-public class GetRepoByIdQueryHandler : IRequestHandler<GetRepoByIdQuery, RepositoryDto>
+internal class GetRepoByIdQueryHandler : IRequestHandler<GetRepoByIdQuery, RepositoryDto>
 {
     private readonly IRepRepository _repository;
 

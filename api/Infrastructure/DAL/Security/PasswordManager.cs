@@ -1,4 +1,5 @@
-﻿using Application.Security;
+﻿using System.Security.Cryptography;
+using Application.Security;
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 
@@ -12,7 +13,6 @@ public class PasswordManager : IPasswordManager
     {
         _passwordHasher = passwordHasher;
     }
-
     public string Secure(string password) => _passwordHasher.HashPassword(null, password);
 
     public bool Validate(string password, string securedPassword) => _passwordHasher.VerifyHashedPassword(null, securedPassword, password) == PasswordVerificationResult.Success;

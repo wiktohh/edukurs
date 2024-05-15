@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.Command.Repositories.RemoveUserFromRepo;
 
-public class RemoveUserFromRepoCommandHandler : IRequestHandler<RemoveUserFromRepoCommand>
+internal class RemoveUserFromRepoCommandHandler : IRequestHandler<RemoveUserFromRepoCommand>
 {
     private readonly IAccountRepository _accountRepository;
     private readonly IRepRepository _repRepository;
