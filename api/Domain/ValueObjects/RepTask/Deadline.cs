@@ -9,7 +9,7 @@ public record Deadline
     {
         if (value < DateTime.Now)
         {
-            throw new InvalidDateException();
+            /*throw new InvalidDateException();*/
         }
         Value = value;
     }
