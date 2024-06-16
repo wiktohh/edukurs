@@ -24,7 +24,7 @@ internal class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
         var user = await _repository.GetByIdAsync(request.Id);
         if (user == null)
         {
-            throw new Exception("User not found");
+            throw new NotFoundException("User not found");
         }
         var role = new Role(request.Role);
         if (user.Role == "Teacher" && role.Value == "Student")
@@ -33,7 +33,7 @@ internal class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand>
         }
         user.UpdateRole(role);
         _repository.UpdateAsync(user);
-        var userRep = await _repRepository.GetAllUsersRepositoriesAsync().Where(x => x.UserId == user.Id).ToListAsync();
+        var userRep =  _repRepository.GetAllUsersRepositoriesAsync().Where(x => x.UserId == user.Id);
         foreach (var userRepository in userRep)
         {
             _repository.RemoveUserFromRepository(userRepository);

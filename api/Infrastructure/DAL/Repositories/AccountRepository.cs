@@ -29,6 +29,8 @@ public class AccountRepository : IAccountRepository
         return await _dbContext.Users.SingleOrDefaultAsync(x => x.Email == email);
     }
 
+    public Task<bool> isEmailUniqueAsync(Email email) => _dbContext.Users.AnyAsync(x => x.Email == email);
+
     public async Task AddAsync(User user)
     {
         await _dbContext.Users.AddAsync(user);

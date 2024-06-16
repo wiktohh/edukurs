@@ -17,6 +17,6 @@ public record Deadline
     public static implicit operator DateTime(Deadline deadline) => deadline.Value;
     public static implicit operator Deadline(DateTime deadline) => new(deadline);
     
-    public override string ToString() => Value.ToString("f");
+    public override string ToString() => Value.ToString("d");
 
 }

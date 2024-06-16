@@ -1,0 +1,6 @@
+{
+  "Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\beczk\\RiderProjects\\ApkiSieciowe\\api\\Application",
+  "Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\beczk\\RiderProjects\\ApkiSieciowe\\api\\Domain",
+  "Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\beczk\\RiderProjects\\ApkiSieciowe\\api\\Infrastructure",
+  "WebApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\beczk\\RiderProjects\\ApkiSieciowe\\api\\WebApi"
+}

@@ -31,7 +31,6 @@ internal class UpdateRepositoryCommandHandler : IRequestHandler<UpdateRepository
             throw new UnauthorazedException("You are not the owner of this repository");
         }
         
-        repository.Name = new Name(request.Name);
         _repRepository.UpdateRepository(repository);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
     }

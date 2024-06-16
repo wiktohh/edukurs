@@ -28,7 +28,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("Deadline")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("date");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -147,6 +147,17 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("ac93cdd8-2693-4681-bfb4-a7f5154f172d"),
+                            Email = "admin@gmail.com",
+                            FirstName = "admin",
+                            LastName = "admin",
+                            Password = "AQAAAAIAAYagAAAAEE98Ci2o2I22k0a1xBZfRO0q1H4Wv25nG4BqHh83NaXicf9IumYlzcBGRZACG21edA==",
+                            Role = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.UserRepository", b =>

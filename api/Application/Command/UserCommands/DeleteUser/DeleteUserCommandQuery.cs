@@ -20,7 +20,7 @@ internal class DeleteUserCommandQuery : IRequestHandler<DeleteUserCommand>
         var user = await _repository.GetByIdAsync(request.Id);
         if (user == null)
         {
-            throw new Exception("User not found");
+            throw new NotFoundException("User not found");
         }
         _repository.DeleteAsync(user);
         var result = await _unitOfWork.SaveChangesAsync(cancellationToken);
