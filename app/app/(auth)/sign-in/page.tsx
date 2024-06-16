@@ -19,10 +19,6 @@ const SignInPage = () => {
   });
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    console.log(userData);
-  }, [userData]);
-
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -34,7 +30,6 @@ const SignInPage = () => {
         userData
       );
       setLoading(false);
-      console.log(response);
       const token = response.data.accessToken;
       localStorage.setItem("token", token);
       router.push("/home");

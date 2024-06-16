@@ -8,6 +8,7 @@ type InvitesDialogProps = {
   isOpen: boolean;
   onClose: () => void;
   invites: any[];
+  onChangeStatus: (id: string, status: string) => void;
 };
 
 enum Status {
@@ -20,14 +21,14 @@ const InvitesDialog: React.FC<InvitesDialogProps> = ({
   isOpen,
   onClose,
   invites,
+  onChangeStatus,
 }) => {
   if (!isOpen) return null;
 
   const axios = useAxios();
 
-  const changeStatus = async (id: string, status: string) => {
-    const response = await axios.put(`/api/Ticket/${id}`, { status });
-    console.log(response);
+  const changeStatusOfInvite = async (id: string, status: string) => {
+    onChangeStatus(id, status);
   };
 
   return (
@@ -50,13 +51,17 @@ const InvitesDialog: React.FC<InvitesDialogProps> = ({
               {invite.status === "Pending" && (
                 <>
                   <button
-                    onClick={() => changeStatus(invite.id, Status.Rejected)}
+                    onClick={() =>
+                      changeStatusOfInvite(invite.id, Status.Rejected)
+                    }
                     className="bg-red-500 text-white px-2 py-1 rounded-lg"
                   >
                     Odrzuć
                   </button>
                   <button
-                    onClick={() => changeStatus(invite.id, Status.Approved)}
+                    onClick={() =>
+                      changeStatusOfInvite(invite.id, Status.Approved)
+                    }
                     className="bg-green-500 text-white px-2 py-1 rounded-lg ml-2"
                   >
                     Zaakceptuj

@@ -4,31 +4,18 @@ import CourseCard from "../../../components/CourseCard";
 import AddCourseDialog from "./dialog/AddCourseDialog";
 import { useAxios } from "@/hooks/use-axios";
 import { Course } from "../all-courses/page";
+import { useAuth } from "@/context/auth-context";
 
 const HomePage = () => {
-  const tmp = [
-    {
-      courseName: "Kurs React",
-      teacherName: "Wiktor Rzeźnicki",
-      id: "1",
-      isEnrolled: true,
-    },
-    {
-      courseName: "Kurs React",
-      teacherName: "Wiktor Rzeźnicki",
-      id: "4",
-      isEnrolled: true,
-    },
-  ];
-
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [courses, setCourses] = useState<Course[]>([]);
 
   const axios = useAxios();
+  const { user } = useAuth();
 
-  const handleAddCourse = (courseName: string) => {
-    const response = axios.post("/api/Repository", { name: courseName });
-    console.log(response);
+  const handleAddCourse = async (courseName: string) => {
+    const response = await axios.post("/api/Repository", { name: courseName });
+    await getCourses();
   };
 
   const getOwnerOfCourse = async (userId: string) => {
@@ -37,24 +24,25 @@ const HomePage = () => {
     return `${response.data.firstName} ${response.data.lastName}`;
   };
 
+  const getCourses = async () => {
+    const response = await axios.get("api/Repository?repoEnum=1");
+    const coursesTmp = await Promise.all(
+      response.data.map(async (courseTmp: any) => {
+        const teacher = await getOwnerOfCourse(courseTmp.ownerId);
+        console.log(courseTmp);
+        return {
+          courseName: courseTmp.name,
+          teacherName: teacher,
+          id: courseTmp.id,
+          isEnrolled: true,
+        };
+      })
+    );
+    setCourses(coursesTmp);
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get("api/Repository?repoEnum=1");
-      const coursesTmp = await Promise.all(
-        response.data.map(async (courseTmp: any) => {
-          const teacher = await getOwnerOfCourse(courseTmp.ownerId);
-          console.log(courseTmp);
-          return {
-            courseName: courseTmp.name,
-            teacherName: teacher,
-            id: courseTmp.id,
-            isEnrolled: true,
-          };
-        })
-      );
-      setCourses(coursesTmp);
-    };
-    fetchData();
+    getCourses();
   }, []);
 
   return (

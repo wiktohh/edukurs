@@ -1,32 +1,33 @@
 "use client";
+import { useAuth } from "@/context/auth-context";
 import { useAxios } from "@/hooks/use-axios";
 import React, { useEffect, useState } from "react";
 import { FaClosedCaptioning } from "react-icons/fa";
-import { IoClose } from "react-icons/io5";
+import { IoClose, IoPersonRemoveSharp } from "react-icons/io5";
+import { MdRemove } from "react-icons/md";
 
 type InvitesDialogProps = {
   isOpen: boolean;
   onClose: () => void;
-  invites: any[];
+  users: any[];
+  repoId: string;
 };
-
-enum Status {
-  Pending = "Pending",
-  Approved = "Approved",
-  Rejected = "Rejected",
-}
-
 const UsersDialog: React.FC<InvitesDialogProps> = ({
   isOpen,
   onClose,
-  invites,
+  users,
+  repoId,
 }) => {
   if (!isOpen) return null;
 
   const axios = useAxios();
 
-  const changeStatus = async (id: string, status: string) => {
-    const response = await axios.put(`/api/Ticket/${id}`, { status });
+  const { user } = useAuth();
+
+  const removeUserFromCourse = async (userId: string) => {
+    const response = await axios.post(`/api/Repository/remove-user/${repoId}`, {
+      id: userId,
+    });
     console.log(response);
   };
 
@@ -37,33 +38,19 @@ const UsersDialog: React.FC<InvitesDialogProps> = ({
           className="text-4xl hover:text-red-500 text-black absolute top-1 right-1 cursor-pointer"
           onClick={onClose}
         />
-        <h2 className="text-2xl font-semibold mb-4">Zaproszenia do kursu</h2>
-        {invites.length === 0 && (
-          <div className="text-center text-xl ">Brak zaproszeń</div>
-        )}
-        {invites.map((invite) => (
-          <div key={invite.id} className="mb-4 flex gap-8">
+        <h2 className="text-2xl font-semibold mb-4">
+          Lista studentów w kursie
+        </h2>
+        {users.map((member) => (
+          <div key={member.id} className="mb-4 flex justify-between">
             <h3 className="text-lg font-semibold">
-              {invite.firstName} {invite.lastName}
+              {member.firstName} {member.lastName}
             </h3>
-            <div>
-              {invite.status === "Pending" && (
-                <>
-                  <button
-                    onClick={() => changeStatus(invite.id, Status.Rejected)}
-                    className="bg-red-500 text-white px-2 py-1 rounded-lg"
-                  >
-                    Odrzuć
-                  </button>
-                  <button
-                    onClick={() => changeStatus(invite.id, Status.Approved)}
-                    className="bg-green-500 text-white px-2 py-1 rounded-lg ml-2"
-                  >
-                    Zaakceptuj
-                  </button>
-                </>
-              )}
-            </div>
+            {user.id !== member.id && (
+              <button onClick={() => removeUserFromCourse(member.id)}>
+                <IoPersonRemoveSharp className="text-2xl hover:text-red-500" />
+              </button>
+            )}
           </div>
         ))}
       </div>

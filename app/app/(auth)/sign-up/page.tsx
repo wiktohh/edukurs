@@ -25,10 +25,6 @@ const SignUpPage = () => {
   });
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    console.log(userData);
-  }, [userData]);
-
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

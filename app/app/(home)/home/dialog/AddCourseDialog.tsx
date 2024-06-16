@@ -4,18 +4,27 @@ import React, { useState } from "react";
 type AddCourseDialogProps = {
   isOpen: boolean;
   onClose: () => void;
-  onAddCourse: (courseName: string) => void;
+  onAddCourse?: (courseName: string) => void;
+  onEditCourse?: (courseName: string) => void;
+  repoName?: string;
 };
 
 const AddCourseDialog: React.FC<AddCourseDialogProps> = ({
   isOpen,
   onClose,
   onAddCourse,
+  onEditCourse,
+  repoName,
 }) => {
-  const [courseName, setCourseName] = useState("");
+  const [courseName, setCourseName] = useState(repoName || "");
 
   const handleAddCourse = () => {
-    onAddCourse(courseName);
+    if (onAddCourse) {
+      onAddCourse(courseName);
+    }
+    if (onEditCourse) {
+      onEditCourse(courseName);
+    }
     setCourseName("");
     onClose();
   };
@@ -25,7 +34,9 @@ const AddCourseDialog: React.FC<AddCourseDialogProps> = ({
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
       <div className="bg-white rounded-lg p-8 shadow-lg">
-        <h2 className="text-2xl font-semibold mb-4">Dodaj kurs</h2>
+        <h2 className="text-2xl font-semibold mb-4">
+          {onAddCourse ? "Dodaj kurs" : "Edytuj kurs"}
+        </h2>
         <input
           type="text"
           className="border border-gray-300 p-2 rounded-lg w-full mb-4"
