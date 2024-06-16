@@ -2,6 +2,11 @@
 import { useEffect, useState } from "react";
 import { useAxios } from "@/hooks/use-axios";
 import ConfirmRemoveUserDialog from "./dialog/ConfirmRemoveUserDialog";
+import { useAuth } from "@/context/auth-context";
+import { Role } from "@/model/enum";
+import { MdCancel, MdEdit } from "react-icons/md";
+import { FaTrash } from "react-icons/fa";
+import { ImCheckmark } from "react-icons/im";
 
 type User = {
   id: string;
@@ -20,6 +25,7 @@ const AdminPanelPage = () => {
   const [userToRemove, setUserToRemove] = useState<string | null>(null);
 
   const axios = useAxios();
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +34,9 @@ const AdminPanelPage = () => {
       setOriginalUsers(response.data);
       console.log(response.data);
     };
-    fetchData();
+    if (user?.role === Role.Admin) {
+      fetchData();
+    }
   }, []);
 
   const handleEditClick = (id: string) => {
@@ -36,7 +44,7 @@ const AdminPanelPage = () => {
   };
 
   const handleCancelClick = () => {
-    setUsers(originalUsers); // Przywróć oryginalne wartości
+    setUsers(originalUsers);
     setEditingUserId(null);
   };
 
@@ -45,7 +53,7 @@ const AdminPanelPage = () => {
     if (user) {
       try {
         await axios.put(`/api/User/${user.id}`, user);
-        setOriginalUsers(users); // Aktualizuj oryginalne wartości po zapisaniu
+        setOriginalUsers(users);
         setEditingUserId(null);
       } catch (error) {
         console.error("Error updating user:", error);
@@ -71,17 +79,21 @@ const AdminPanelPage = () => {
     }
   };
 
+  const roleOptions = ["Admin", "Student", "Teacher"];
+
   return (
     <div className="bg-gray-100 flex-grow">
       <div className="shadow-md bg-white">
         <h1 className="font-semibold text-3xl py-4 px-2">Lista użytkowników</h1>
       </div>
-      <p>Lista użytkowników</p>
+      <h2 className="text-2xl font-semibold w-4/5 m-auto py-4">
+        Liczba użytkowników ({users.length})
+      </h2>
       <div className="w-full flex flex-wrap justify-center gap-4">
         {users.map((user) => (
           <div
             key={user.id}
-            className="w-4/5 bg-white shadow-md p-4 rounded-lg flex justify-between"
+            className="w-4/5 h-20 bg-white shadow-md p-4 rounded-lg flex justify-between"
           >
             {editingUserId === user.id ? (
               <>
@@ -96,7 +108,7 @@ const AdminPanelPage = () => {
                       )
                     );
                   }}
-                  className="border border-gray-300 p-2 rounded-lg"
+                  className="border border-gray-300 p-2 rounded-lg w-1/4 h-full"
                 />
                 <input
                   type="text"
@@ -108,10 +120,9 @@ const AdminPanelPage = () => {
                       )
                     )
                   }
-                  className="border border-gray-300 p-2 rounded-lg"
+                  className="border border-gray-300 p-2 rounded-lg w-1/4 h-full"
                 />
-                <input
-                  type="text"
+                <select
                   value={user.role}
                   onChange={(e) =>
                     setUsers((prevUsers) =>
@@ -120,45 +131,51 @@ const AdminPanelPage = () => {
                       )
                     )
                   }
-                  className="border border-gray-300 p-2 rounded-lg"
-                />
-                <div className="flex gap-4">
+                  className="border border-gray-300 p-2 rounded-lg w-1/4 h-full"
+                >
+                  {roleOptions.map((role, index) => (
+                    <option key={index} value={role}>
+                      {role}
+                    </option>
+                  ))}
+                </select>
+                <div className="relative flex gap-4 w-1/4 justify-end items-center">
                   <button
                     onClick={handleCancelClick}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+                    className="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 w-10 h-10 flex justify-center items-center"
                   >
-                    Anuluj
+                    <MdCancel className="text-3xl" />
                   </button>
                   <button
                     onClick={handleSaveClick}
-                    className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
+                    className="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 w-10 h-10 flex justify-center items-center"
                   >
-                    Zatwierdź
+                    <ImCheckmark className="text-xl" />
                   </button>
                 </div>
               </>
             ) : (
-              <>
-                <h2 className="text-xl font-semibold">
+              <div className="relative w-full flex justify-between items-center">
+                <h2 className="text-xl font-semibold w-1/4">
                   {user.firstName} {user.lastName}
                 </h2>
-                <p>{user.email}</p>
-                <p>{user.role}</p>
-                <div className="flex gap-4">
+                <p className="w-1/4 text-lg">{user.email}</p>
+                <p className="w-1/4 text-lg">{user.role}</p>
+                <div className="flex gap-4 w-1/4 justify-end">
                   <button
                     onClick={() => handleEditClick(user.id)}
-                    className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600"
+                    className="bg-yellow-500 text-white p-2 rounded-lg hover:bg-yellow-600 w-10 h-10 flex justify-center items-center"
                   >
-                    Edytuj
+                    <MdEdit className="text-2xl" />
                   </button>
                   <button
                     onClick={() => handleRemoveClick(user.id)}
-                    className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+                    className="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 w-10 h-10 flex justify-center items-center"
                   >
-                    Usuń
+                    <FaTrash className="text-xl" />
                   </button>
                 </div>
-              </>
+              </div>
             )}
           </div>
         ))}

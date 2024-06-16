@@ -1,5 +1,6 @@
 "use client";
 import { useAxios } from "@/hooks/use-axios";
+import { Status } from "@/model/enum";
 import React, { useEffect, useState } from "react";
 import { FaClosedCaptioning } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
@@ -10,12 +11,6 @@ type InvitesDialogProps = {
   invites: any[];
   onChangeStatus: (id: string, status: string) => void;
 };
-
-enum Status {
-  Pending = "Pending",
-  Approved = "Approved",
-  Rejected = "Rejected",
-}
 
 const InvitesDialog: React.FC<InvitesDialogProps> = ({
   isOpen,

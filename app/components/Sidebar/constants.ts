@@ -1,17 +1,20 @@
 import path from "path";
 import { FaHome, FaListAlt } from "react-icons/fa";
 
-export const links = [
+export const userlinks = [
   {
-    title: "Home",
+    title: "Strona główna",
     path: "/home",
     icon: FaHome,
   },
   {
-    title: "All courses",
+    title: "Wszystkie kursy",
     path: "/all-courses",
     icon: FaListAlt,
   },
+];
+
+export const adminLinks = [
   {
     title: "Lista kont",
     path: "/admin-panel",

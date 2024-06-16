@@ -1,17 +1,26 @@
 "use client";
-import { useEffect } from "react";
-import { links } from "./constants";
+import { useAuth } from "@/context/auth-context";
+import { Role } from "@/model/enum";
+import { userlinks, adminLinks } from "./constants";
 import Link from "next/link";
 
 const NavLinks = () => {
-  useEffect(() => {
-    console.log(links);
-  }, []);
+  const { user } = useAuth();
+
   return (
     <nav>
       <ul className="flex flex-col gap-4">
-        {links.map((link, index) => {
-          return (
+        {userlinks.map((link, index) => (
+          <li
+            className="uppercase text-gray-600 hover:text-black flex gap-3 items-center"
+            key={index}
+          >
+            <link.icon className="text-2xl" />
+            <Link href={link.path}>{link.title}</Link>
+          </li>
+        ))}
+        {user?.role === Role.Admin &&
+          adminLinks.map((link, index) => (
             <li
               className="uppercase text-gray-600 hover:text-black flex gap-3 items-center"
               key={index}
@@ -19,8 +28,7 @@ const NavLinks = () => {
               <link.icon className="text-2xl" />
               <Link href={link.path}>{link.title}</Link>
             </li>
-          );
-        })}
+          ))}
       </ul>
     </nav>
   );

@@ -10,6 +10,8 @@ import AddCourseDialog from "../../../../components/AddEditCourseDialog";
 import UsersDialog from "./components/UsersDialog";
 import { CourseInfo, Invite, Task } from "@/model/types";
 import AddEditCourseDialog from "../../../../components/AddEditCourseDialog";
+import { useAuth } from "@/context/auth-context";
+import { Role } from "@/model/enum";
 
 const CoursePage = () => {
   const { id } = useParams<{ id: string }>();
@@ -22,6 +24,7 @@ const CoursePage = () => {
   const [repoInfo, setRepoInfo] = useState<CourseInfo>(); // [id, name, description, createdAt, updatedAt, userId, courseId, course, user
 
   const axios = useAxios();
+  const { user } = useAuth();
 
   const getTasks = async () => {
     const responseTasks = await axios.get(`/api/Task/repository/${id}`);
@@ -42,8 +45,10 @@ const CoursePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       await getRepoInfo();
-      await getInvites();
       await getTasks();
+      if (user?.role === Role.Teacher && user.id === repoInfo?.ownerId) {
+        await getInvites();
+      }
     };
     fetchData();
   }, []);
@@ -91,37 +96,39 @@ const CoursePage = () => {
         <p className="text-3xl font-semibold">
           Witamy w kursie: {repoInfo?.name}
         </p>
-        <div className="flex flex-col justify-end absolute right-2 gap-4">
-          <button
-            onClick={() => setIsEditDialogOpen(true)}
-            className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 "
-          >
-            Edycja
-          </button>
-          <button
-            onClick={() => setIsUsersDialogOpen(true)}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 "
-          >
-            Uczestnicy
-          </button>
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 "
-            onClick={() => setIsAddTaskDialogOpen(true)}
-          >
-            Dodaj zadanie
-          </button>
-          <button
-            className="relative bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-            onClick={() => setIsInvitesDialogOpen(true)}
-          >
-            Zaproszenia
-            {invites.length > 0 && (
-              <div className="bg-red-500 absolute right-[-.5rem] top-[-.5rem] w-6 h-6 rounded-full flex justify-center items-center">
-                {invites.length}
-              </div>
-            )}
-          </button>
-        </div>
+        {user?.role !== Role.Student && user?.id === repoInfo?.ownerId && (
+          <div className="flex flex-col justify-end absolute right-2 gap-4">
+            <button
+              onClick={() => setIsEditDialogOpen(true)}
+              className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 "
+            >
+              Edycja
+            </button>
+            <button
+              onClick={() => setIsUsersDialogOpen(true)}
+              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 "
+            >
+              Uczestnicy
+            </button>
+            <button
+              className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 "
+              onClick={() => setIsAddTaskDialogOpen(true)}
+            >
+              Dodaj zadanie
+            </button>
+            <button
+              className="relative bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+              onClick={() => setIsInvitesDialogOpen(true)}
+            >
+              Zaproszenia
+              {invites.length > 0 && (
+                <div className="bg-red-500 absolute right-[-.5rem] top-[-.5rem] w-6 h-6 rounded-full flex justify-center items-center">
+                  {invites.length}
+                </div>
+              )}
+            </button>
+          </div>
+        )}
       </div>
       <p className="text-2xl font-semibold w-2/5 m-auto pb-4">Lista zadań:</p>
       <div className="flex flex-col items-center gap-4 justify-center">
