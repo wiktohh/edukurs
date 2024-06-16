@@ -3,13 +3,7 @@ import { useEffect, useState } from "react";
 import CourseCard from "../../../components/CourseCard";
 import { useAxios } from "@/hooks/use-axios";
 import { useAuth } from "@/context/auth-context";
-
-export type Course = {
-  courseName: string;
-  teacherName: string;
-  id: string;
-  isEnrolled: boolean;
-};
+import { Course } from "@/model/types";
 
 const AllCoursesPage = () => {
   const [courses, setCourses] = useState<Course[]>([]);

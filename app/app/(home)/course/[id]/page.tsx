@@ -6,9 +6,10 @@ import { useEffect, useState } from "react";
 import { useAxios } from "@/hooks/use-axios";
 import AddTaskDialog from "./components/AddTaskDialog";
 import { CgLayoutGrid } from "react-icons/cg";
-import AddCourseDialog from "../../home/dialog/AddCourseDialog";
+import AddCourseDialog from "../../../../components/AddEditCourseDialog";
 import UsersDialog from "./components/UsersDialog";
-import { DiVim } from "react-icons/di";
+import { CourseInfo, Invite, Task } from "@/model/types";
+import AddEditCourseDialog from "../../../../components/AddEditCourseDialog";
 
 const CoursePage = () => {
   const { id } = useParams<{ id: string }>();
@@ -16,9 +17,9 @@ const CoursePage = () => {
   const [isInvitesDialogOpen, setIsInvitesDialogOpen] = useState(false);
   const [isUsersDialogOpen, setIsUsersDialogOpen] = useState(false);
   const [isAddTaskDialogOpen, setIsAddTaskDialogOpen] = useState(false); // [id, title, deadline, description, status, repositoryId, userId, createdAt, updatedAt
-  const [invites, setInvites] = useState([]); // [id, sender, message
-  const [tasks, setTasks] = useState([]); // [id, title, deadline, description, status, repositoryId, userId, createdAt, updatedAt
-  const [repoInfo, setRepoInfo] = useState(); // [id, name, description, createdAt, updatedAt, userId, courseId, course, user
+  const [invites, setInvites] = useState<Invite[] | []>([]); // [id, sender, message
+  const [tasks, setTasks] = useState<Task[]>([]); // [id, title, deadline, description, status, repositoryId, userId, createdAt, updatedAt
+  const [repoInfo, setRepoInfo] = useState<CourseInfo>(); // [id, name, description, createdAt, updatedAt, userId, courseId, course, user
 
   const axios = useAxios();
 
@@ -29,14 +30,18 @@ const CoursePage = () => {
 
   const getInvites = async () => {
     const response = await axios.get(`/api/Ticket/pending`);
+    console.log(response.data);
     setInvites(response.data);
+  };
+
+  const getRepoInfo = async () => {
+    const responseRepo = await axios.get(`/api/Repository/${id}`);
+    setRepoInfo(responseRepo.data);
   };
 
   useEffect(() => {
     const fetchData = async () => {
-      const responseRepo = await axios.get(`/api/Repository/${id}`);
-      setRepoInfo(responseRepo.data);
-      console.log(responseRepo.data);
+      await getRepoInfo();
       await getInvites();
       await getTasks();
     };
@@ -58,6 +63,15 @@ const CoursePage = () => {
     const response = await axios.put(`/api/Ticket/${id}`, { status });
     console.log(response);
     await getInvites();
+    await getRepoInfo();
+  };
+
+  const removeUserFromCourse = async (userId: string) => {
+    const response = await axios.post(`/api/Repository/remove-user/${id}`, {
+      userId,
+    });
+    console.log(response);
+    await getRepoInfo();
   };
 
   const editCourse = async (name: string) => {
@@ -126,17 +140,17 @@ const CoursePage = () => {
         onClose={() => setIsAddTaskDialogOpen(false)}
         onAddTask={addTask}
       />
-      <AddCourseDialog
+      <AddEditCourseDialog
         isOpen={isEditDialogOpen}
         onClose={() => setIsEditDialogOpen(false)}
         onAddCourse={editCourse}
-        courseName={repoInfo?.name}
       />
       <UsersDialog
         isOpen={isUsersDialogOpen}
         onClose={() => setIsUsersDialogOpen(false)}
         users={repoInfo?.users}
         repoId={id}
+        removeUser={(userId) => removeUserFromCourse(userId)}
       />
     </div>
   );

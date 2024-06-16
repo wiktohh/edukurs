@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-type AddCourseDialogProps = {
+type AddEditCourseDialogProps = {
   isOpen: boolean;
   onClose: () => void;
   onAddCourse?: (courseName: string) => void;
@@ -9,7 +9,7 @@ type AddCourseDialogProps = {
   repoName?: string;
 };
 
-const AddCourseDialog: React.FC<AddCourseDialogProps> = ({
+const AddEditCourseDialog: React.FC<AddEditCourseDialogProps> = ({
   isOpen,
   onClose,
   onAddCourse,
@@ -64,4 +64,4 @@ const AddCourseDialog: React.FC<AddCourseDialogProps> = ({
   );
 };
 
-export default AddCourseDialog;
+export default AddEditCourseDialog;

@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import CourseCard from "../../../components/CourseCard";
-import AddCourseDialog from "./dialog/AddCourseDialog";
 import { useAxios } from "@/hooks/use-axios";
-import { Course } from "../all-courses/page";
 import { useAuth } from "@/context/auth-context";
+import AddEditCourseDialog from "../../../components/AddEditCourseDialog";
+import { Course } from "@/model/types";
 
 const HomePage = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -68,7 +68,7 @@ const HomePage = () => {
           <CourseCard key={course.id} {...course} />
         ))}
       </div>
-      <AddCourseDialog
+      <AddEditCourseDialog
         isOpen={isDialogOpen}
         onClose={() => setIsDialogOpen(false)}
         onAddCourse={(courseName) => handleAddCourse(courseName)}
