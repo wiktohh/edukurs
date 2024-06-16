@@ -21,6 +21,7 @@ public class TasksConfiguration : IEntityTypeConfiguration<RepTask>
             .IsRequired();
         builder.Property(x => x.Deadline)
             .HasConversion(x => x.Value, x => new Deadline(x))
+            .HasColumnType("date")
             .IsRequired();
         builder.HasOne(x => x.Repository)
             .WithMany(x => x.RepTasks)
