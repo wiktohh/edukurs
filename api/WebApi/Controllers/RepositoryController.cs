@@ -11,6 +11,7 @@ using Application.Command.Tickets.SendTIcketCommand;
 using Application.DTO;
 using Application.DTO.Request;
 using Application.Query.RepoQueries;
+using Application.Query.RepoQueries.GetRepoById;
 using Application.Query.RepoQueries.GetRepos;
 using Application.Query.TicketQueries;
 using Application.Query.TicketQueries.GetPendingTickets;
@@ -122,5 +123,17 @@ public class RepositoryController : ControllerBase
         };
         await _mediator.Send(command);
         return Ok();
+    }
+    
+    [HttpGet("{id}")]
+    [Authorize]
+    public async Task<IActionResult> GetRepositoryById([FromRoute]Guid id)
+    {
+        var command = new GetRepoByIdQuery()
+        {
+            Id = id,
+        };
+        var response = await _mediator.Send(command);
+        return Ok(response);
     }
 }

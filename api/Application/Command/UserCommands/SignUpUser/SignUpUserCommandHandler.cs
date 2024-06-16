@@ -24,7 +24,8 @@ internal class SignUpUserCommandHandler : IRequestHandler<SignUpUserCommand>
     public async Task Handle(SignUpUserCommand request, CancellationToken cancellationToken)
     {
         var user = await _accountRepository.GetByEmailAsync(request.Email);
-        if (user is not null)
+        var emailUnique = await _accountRepository.isEmailUniqueAsync(request.Email);
+        if (!emailUnique)
         {
             throw new UserAlreadyExistsException(request.Email);
         }

@@ -23,7 +23,8 @@ internal class SignInUserCommandHandler : IRequestHandler<SignInUserCommand>
     public async Task Handle(SignInUserCommand request, CancellationToken cancellationToken)
     {
         var user = await _accountRepository.GetByEmailAsync(request.Email);
-        if (user is null)
+        var exists = await _accountRepository.isEmailUniqueAsync(request.Email);
+        if (!exists)
         {
             throw new InvalidCredentialsException();
         }

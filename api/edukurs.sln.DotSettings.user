@@ -1,7 +1,55 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=db24b3f9_002D9f43_002D4e88_002Dbeb1_002Daeae9fa4f983/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Create_password_ShouldSuccess" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5029c64d_002D7a8b_002D4491_002D913a_002D4a76837539e6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="SignInCommand_ShouldThrowException_WhenPasswordIsInvalid" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::C7C28DC9-6032-4ECF-9B20-AB06605422DA::net8.0::Edukurs.Domain.Tests.Entities.UserTest&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::C7C28DC9-6032-4ECF-9B20-AB06605422DA::net8.0::Edukurs.Domain.Tests.Entities.TicketTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::E148761D-794F-432B-9625-5B8A3AF11B0C::net8.0::Edukurs.Application.Tests.Commands.SignInUserCommandTest.SignInCommand_ShouldThrowException_WhenPasswordIsInvalid&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5575a02d_002Dc53c_002D40cd_002D95fe_002De6345f4c77c0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="SignInCommand_ShouldThrowException_WhenPasswordIsInvalid #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;TestAncestor&gt;&#xD;
+      &lt;TestId&gt;xUnit::E148761D-794F-432B-9625-5B8A3AF11B0C::net8.0::Edukurs.Application.Tests.Commands.SignInUserCommandTest&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::E148761D-794F-432B-9625-5B8A3AF11B0C::net8.0::Edukurs.Application.Tests.Commands.DeleteUserCommandTest.DeleteUserCommand_ShouldThrowException_WhenUserNotFound&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::E148761D-794F-432B-9625-5B8A3AF11B0C::net8.0::Edukurs.Application.Tests.Commands.DeleteUserCommandTest.DeleteUserCommand_ShouldThrowException_WhenSavingChangesFailed&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::E148761D-794F-432B-9625-5B8A3AF11B0C::net8.0::Edukurs.Application.Tests.Commands.DeleteUserCommandTest.DeleteUserCommand_ShouldSucced_WhenValid&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::E148761D-794F-432B-9625-5B8A3AF11B0C::net8.0::Edukurs.Application.Tests.Commands.UpdateUserCommandTest.UpdateUserCommand_ShouldThrowException_WhenUserNotFound&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::E148761D-794F-432B-9625-5B8A3AF11B0C::net8.0::Edukurs.Application.Tests.Commands.UpdateUserCommandTest.UpdateUserCommand_ShouldThrowException_WhenRoleIsInvalid&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::E148761D-794F-432B-9625-5B8A3AF11B0C::net8.0::Edukurs.Application.Tests.Commands.UpdateUserCommandTest.UpdateUserCommand_ShouldThrowException_WhenRoleSavingChangesFailes&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::E148761D-794F-432B-9625-5B8A3AF11B0C::net8.0::Edukurs.Application.Tests.Commands.UpdateUserCommandTest.UpdateUserCommand_ShouldSucced_WhenValid&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::E148761D-794F-432B-9625-5B8A3AF11B0C::net8.0::Edukurs.Application.Tests.Commands.UpdateUserCommandTest.UpdateUserCommand_ShouldThrowException_WhenSavingChangesFailed&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::E148761D-794F-432B-9625-5B8A3AF11B0C::net8.0::Edukurs.Application.Tests.Commands.RespondToTicketCommandTest.RespondToTicketCommand_ShouldThrowException_WhenTicketNotFound&lt;/TestId&gt;&#xD;
+    &lt;/TestAncestor&gt;&#xD;
+    &lt;Project Location="C:\Users\beczk\RiderProjects\ApkiSieciowe\api\Edukurs.IntegrationTests" Presentation="&amp;lt;tests&amp;gt;\&amp;lt;Edukurs.IntegrationTests&amp;gt;" /&gt;&#xD;
+    &lt;Project Location="C:\Users\beczk\RiderProjects\ApkiSieciowe\api\Edukurs.Domain.Tests" Presentation="&amp;lt;tests&amp;gt;\&amp;lt;Edukurs.Domain.Tests&amp;gt;" /&gt;&#xD;
+    &lt;ProjectFile&gt;E148761D-794F-432B-9625-5B8A3AF11B0C/d:Commands/f:UpdateUserCommandTest.cs&lt;/ProjectFile&gt;&#xD;
+  &lt;/Or&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5de30d85_002Db797_002D4a0b_002D8ee9_002Dbd9d1b0b95c9/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="SignUpCommand_ShouldSuccessResult_WhenValidData" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::E148761D-794F-432B-9625-5B8A3AF11B0C::net8.0::Edukurs.Application.Tests.Commands.SignUpUserCommandTest.SignUpCommand_ShouldSuccessResult_WhenValidData&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::E148761D-794F-432B-9625-5B8A3AF11B0C::net8.0::Edukurs.Application.Tests.Commands.SignInUserCommandTest.SignInCommand_ShouldFailResult_WhenUserDontExist&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::E148761D-794F-432B-9625-5B8A3AF11B0C::net8.0::Edukurs.Application.Tests.Commands.SignUpUserCommandTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::E148761D-794F-432B-9625-5B8A3AF11B0C::net8.0::Edukurs.Application.Tests.Commands.SignInUserCommandTest.SignInCommand_ShouldThrowException_WhenPasswordIsInvalid&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::E148761D-794F-432B-9625-5B8A3AF11B0C::net8.0::Edukurs.Application.Tests.Commands.SignInUserCommandTest.SignInCommand_ShouldThrowException_WhenUserDontExist&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=78943550_002Dff36_002D4346_002D8e98_002D390cad385c58/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CreateUserCommand_ShouldFailResult_WhenUserAlreadyExists" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::E148761D-794F-432B-9625-5B8A3AF11B0C::net8.0::Edukurs.Application.Tests.Commands.SignUpUserCommandTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c9e02335_002D03a9_002D4e0c_002Da0b1_002De65725f4267c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="CreateUserCommand_ShouldFailResult_WhenUserAlreadyExists #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::E148761D-794F-432B-9625-5B8A3AF11B0C::net8.0::Edukurs.Application.Tests.Commands.SignUpUserCommandTest.SignUpCommand_ShouldSuccessResult_WhenValidData&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=db24b3f9_002D9f43_002D4e88_002Dbeb1_002Daeae9fa4f983/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Create_password_ShouldSuccess" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;TestAncestor&gt;&#xD;
+      &lt;TestId&gt;xUnit::C7C28DC9-6032-4ECF-9B20-AB06605422DA::net8.0::Edukurs.Domain.Tests.Entities.UserTest&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::C7C28DC9-6032-4ECF-9B20-AB06605422DA::net8.0::Edukurs.Domain.Tests.Entities.TicketTest&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::E5249790-B57A-4B7A-B5F0-926A70195B08::net8.0::Edukurs.IntegrationTests.AccountControllerTest.GetAllUsers_ShouldReturnUnauthorized_WhenUserIsNotLogged&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::E5249790-B57A-4B7A-B5F0-926A70195B08::net8.0::Edukurs.IntegrationTests.AccountControllerTest&lt;/TestId&gt;&#xD;
+    &lt;/TestAncestor&gt;&#xD;
+    &lt;ProjectFile&gt;E148761D-794F-432B-9625-5B8A3AF11B0C/d:Commands/f:SignUpUserCommandTest.cs&lt;/ProjectFile&gt;&#xD;
+  &lt;/Or&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

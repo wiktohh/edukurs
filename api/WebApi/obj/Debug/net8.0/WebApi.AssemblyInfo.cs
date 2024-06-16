@@ -10,10 +10,11 @@
 using System;
 using System.Reflection;
 
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Edukurs.IntegrationTests")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+48b25387d12e558e4a9d45c52155a9259e5226ee")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0fbd648df33528cd0aae64b9ad98337571c0cade")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
