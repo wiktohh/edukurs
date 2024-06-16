@@ -70,7 +70,7 @@ public class RepositoryController : ControllerBase
     
     [HttpPost("remove-user/{id}")]
     [Authorize]
-    public async Task<IActionResult> RemoveUserFromRepo([FromRoute]Guid id,[FromBody] Guid UserId)
+    public async Task<IActionResult> RemoveUserFromRepo([FromRoute]Guid id,[FromBody] RemoveFromRepoRequest user)
     {
         if(User.Identity?.Name is null)
         {
@@ -80,7 +80,7 @@ public class RepositoryController : ControllerBase
         var command = new RemoveUserFromRepoCommand()
         {
             RepositoryId = id,
-            UserId = UserId,
+            UserId = user.UserId,
             SenderId = guid
         };
         await _mediator.Send(command);

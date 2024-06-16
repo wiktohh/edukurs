@@ -1,5 +1,6 @@
 ﻿using Application.Exceptions;
 using Domain.Entities;
+using Domain.Exceptions;
 using Domain.Repositories;
 using Domain.ValueObjects.Repository;
 using Domain.ValueObjects.RepTask;
@@ -23,6 +24,10 @@ internal class CreateTaskCommandHandler : IRequestHandler<CreateTaskCommand>
     public async Task Handle(CreateTaskCommand request, CancellationToken cancellationToken)
     {
         var repository = await _repRepository.GetRepositoryByIdAsync(request.RepositoryId);
+        if (request.Deadline < DateTime.Now)
+        {
+            throw new InvalidDeadlineException();
+        }
         if (repository is null)
         {
             throw new NotFoundException("Repository not found");
@@ -47,5 +52,13 @@ internal class CreateTaskCommandHandler : IRequestHandler<CreateTaskCommand>
         };
         await _taskRepository.AddRepTaskAsync(task);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+    }
+}
+
+public class InvalidDeadlineException : BaseException
+{
+    public InvalidDeadlineException( ) : base("Date cannot be in the past")
+    {
+        throw new NotImplementedException();
     }
 }
