@@ -12,6 +12,7 @@ import { CourseInfo, Invite, Task } from "@/model/types";
 import AddEditCourseDialog from "../../../../components/AddEditCourseDialog";
 import { useAuth } from "@/context/auth-context";
 import { Role } from "@/model/enum";
+import { toast } from "react-toastify";
 
 const CoursePage = () => {
   const { id } = useParams<{ id: string }>();
@@ -52,37 +53,53 @@ const CoursePage = () => {
         await getInvites();
       }
     };
-    fetchData();
+    try {
+      fetchData();
+    } catch (e) {
+      toast.error("Wystąpił błąd podczas pobierania danych");
+    }
   }, [user?.role, user?.id, repoInfo?.ownerId]);
 
   const addTask = async (title: string, description: string, date: string) => {
-    console.log(date);
-    const response = await axios.post(`/api/Task/repository/${id}`, {
-      title,
-      description,
-      deadline: date,
-    });
-    await getTasks();
+    try {
+      console.log(date);
+      const response = await axios.post(`/api/Task/repository/${id}`, {
+        title,
+        description,
+        deadline: date,
+      });
+      await getTasks();
+      toast.success("Zadanie zostało dodane");
+    } catch (e) {
+      toast.error("Wystąpił błąd podczas dodawania zadania");
+    }
   };
 
   const changeStatus = async (id: string, status: string) => {
-    const response = await axios.put(`/api/Ticket/${id}`, { status });
-    await getInvites();
-    await getRepoInfo();
+    try {
+      const response = await axios.put(`/api/Ticket/${id}`, { status });
+      await getInvites();
+      await getRepoInfo();
+      toast.success("Status zaproszenia został zmieniony");
+    } catch (e) {
+      toast.error("Wystąpił błąd podczas zmiany statusu zaproszenia");
+    }
   };
 
   const removeUserFromCourse = async (userId: string) => {
-    const response = await axios.post(`/api/Repository/remove-user/${id}`, {
-      userId,
-    });
-    await getRepoInfo();
+    try {
+      const response = await axios.post(`/api/Repository/remove-user/${id}`, {
+        userId,
+      });
+      await getRepoInfo();
+      toast.success("Użytkownik został usunięty z kursu");
+    } catch (e) {
+      toast.error("Wystąpił błąd podczas usuwania użytkownika z kursu");
+    }
   };
 
   const editCourse = async (name: string) => {
-    console.log(name);
-    const response = await axios.put(`/api/Repository/${id}`, {
-      name,
-    });
+    toast.success("Prośba o edycję kursu została wysłana");
   };
 
   return (

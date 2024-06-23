@@ -35,6 +35,8 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = ({
     onClose();
   };
 
+  const minValue = new Date().toISOString().split("T")[0];
+
   if (!isOpen) return null;
 
   return (
@@ -59,6 +61,7 @@ const AddTaskDialog: React.FC<AddTaskDialogProps> = ({
           type="date"
           className="border border-gray-300 p-2 rounded-lg w-full mb-4"
           placeholder="Termin oddania"
+          min={minValue}
           value={taskDate}
           onChange={(e) => setTaskDate(e.target.value)}
         />

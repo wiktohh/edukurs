@@ -8,6 +8,7 @@ import { useAuth } from "@/context/auth-context";
 import { Role } from "@/model/enum";
 import EditDeadlineDialog from "./EditDeadlineDialog";
 import { displayDate } from "@/utils/display-date";
+import { toast } from "react-toastify";
 
 const TaskPage = () => {
   const pathname = usePathname();
@@ -61,6 +62,7 @@ const TaskPage = () => {
       value: deadline,
     });
     getTaskInfo();
+    toast.success("Zaktualizowano termin");
   };
 
   const getAllFiles = async () => {

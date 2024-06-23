@@ -2,6 +2,7 @@ import { useAuth } from "@/context/auth-context";
 import { useAxios } from "@/hooks/use-axios";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 type FileUpload = {
   deadline: string;
@@ -35,7 +36,7 @@ const FileUpload: React.FC<FileUpload> = ({ deadline }) => {
 
   const handleFileUpload = async () => {
     if (!selectedFile) {
-      alert("Please select a file first!");
+      alert("Dodaj plik!");
       return;
     }
 
@@ -49,6 +50,7 @@ const FileUpload: React.FC<FileUpload> = ({ deadline }) => {
       );
       console.log(response);
       setUploadTime(new Date());
+      toast.success("Plik został przesłany pomyślnie!");
       if (user) {
         localStorage.setItem(
           `uploadTime-${taskId}-${user.id}`,
@@ -57,7 +59,7 @@ const FileUpload: React.FC<FileUpload> = ({ deadline }) => {
       }
     } catch (error) {
       console.error("Error uploading file:", error);
-      alert("File upload failed, please try again.");
+      toast.error("Wystąpił błąd podczas przesyłania pliku");
     }
   };
 

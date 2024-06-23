@@ -31,6 +31,8 @@ const EditDeadlineDialog: React.FC<EditDeadlineDialog> = ({
     onClose();
   };
 
+  const minValue = new Date().toISOString().split("T")[0];
+
   if (!isOpen) return null;
 
   return (
@@ -42,6 +44,7 @@ const EditDeadlineDialog: React.FC<EditDeadlineDialog> = ({
           className="border border-gray-300 p-2 rounded-lg w-full mb-4"
           placeholder="Termin oddania"
           value={deadline}
+          min={minValue}
           onChange={(e) => setDeadline(e.target.value)}
         />
         <div className="flex justify-end">

@@ -6,6 +6,7 @@ import { useAuth } from "@/context/auth-context";
 import AddEditCourseDialog from "../../../components/AddEditCourseDialog";
 import { Course } from "@/model/types";
 import { Role } from "@/model/enum";
+import { toast } from "react-toastify";
 
 const HomePage = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -15,8 +16,14 @@ const HomePage = () => {
   const { user } = useAuth();
 
   const handleAddCourse = async (courseName: string) => {
-    const response = await axios.post("/api/Repository", { name: courseName });
-    await getCourses();
+    try {
+      const response = await axios.post("/api/Repository", {
+        name: courseName,
+      });
+      await getCourses();
+    } catch (e) {
+      toast.error("Wystąpił błąd podczas dodawania kursu");
+    }
   };
 
   const getOwnerOfCourse = async (userId: string) => {
@@ -43,7 +50,11 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    getCourses();
+    try {
+      getCourses();
+    } catch (e) {
+      toast.error("Wystąpił błąd podczas pobierania danych");
+    }
   }, []);
 
   return (
