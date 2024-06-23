@@ -1,8 +1,31 @@
-import React, { useState } from "react";
+import { useAuth } from "@/context/auth-context";
+import { useAxios } from "@/hooks/use-axios";
+import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
-const FileUpload: React.FC = () => {
+type FileUpload = {
+  deadline: string;
+};
+
+const FileUpload: React.FC<FileUpload> = ({ deadline }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploadTime, setUploadTime] = useState<Date | null>(null);
+
+  const axios = useAxios();
+  const pathname = usePathname();
+  const taskId = pathname.split("/").at(-1);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      const storedUploadTime = localStorage.getItem(
+        `uploadTime-${taskId}-${user.id}`
+      );
+      if (storedUploadTime) {
+        setUploadTime(new Date(storedUploadTime));
+      }
+    }
+  }, [taskId, user]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
@@ -10,7 +33,7 @@ const FileUpload: React.FC = () => {
     }
   };
 
-  const handleFileUpload = () => {
+  const handleFileUpload = async () => {
     if (!selectedFile) {
       alert("Please select a file first!");
       return;
@@ -19,40 +42,52 @@ const FileUpload: React.FC = () => {
     const formData = new FormData();
     formData.append("file", selectedFile);
 
-    // Replace 'your-upload-url' with the actual endpoint you want to send the file to.
-    fetch("your-upload-url", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-        setUploadTime(new Date());
-        alert("File uploaded successfully!");
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("File upload failed!");
-      });
+    try {
+      const response = await axios.post(
+        "/api/File/upload/" + pathname.split("/").at(-1),
+        formData
+      );
+      console.log(response);
+      setUploadTime(new Date());
+      if (user) {
+        localStorage.setItem(
+          `uploadTime-${taskId}-${user.id}`,
+          new Date().toString()
+        );
+      }
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      alert("File upload failed, please try again.");
+    }
   };
 
   return (
     <div className="file-upload">
-      <input
-        type="file"
-        onChange={handleFileChange}
-        className="mb-4 p-2 border rounded"
-      />
-      <button
-        onClick={handleFileUpload}
-        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
-      >
-        Upload
-      </button>
+      {new Date() < new Date(deadline) ? (
+        <>
+          <input
+            type="file"
+            onChange={handleFileChange}
+            className="mb-4 p-2 border rounded"
+          />
+          <button
+            onClick={handleFileUpload}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+          >
+            Upload
+          </button>
+        </>
+      ) : (
+        <div className="bg-red-300 border-red-600 border-[.1rem] rounded-md p-4 mb-4">
+          <p className="text-red-600 text-xl">
+            Upłynął termin oddawania plików, nie można już ich przesyłać.
+          </p>
+        </div>
+      )}
       {uploadTime && (
-        <div className="mt-4">
-          <p className="text-green-600">
-            File uploaded at {uploadTime.toLocaleTimeString()} on{" "}
+        <div className="bg-green-200 border-green-600 border-[.1rem] rounded-md p-4">
+          <p className="text-green-600 text-xl text-semibold">
+            Przesłano plik o godzinie {uploadTime.toLocaleTimeString()} dnia{" "}
             {uploadTime.toLocaleDateString()}
           </p>
         </div>

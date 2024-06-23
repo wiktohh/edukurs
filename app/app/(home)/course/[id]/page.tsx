@@ -39,6 +39,7 @@ const CoursePage = () => {
 
   const getRepoInfo = async () => {
     const responseRepo = await axios.get(`/api/Repository/${id}`);
+    console.log(responseRepo.data);
     setRepoInfo(responseRepo.data);
   };
 
@@ -46,12 +47,13 @@ const CoursePage = () => {
     const fetchData = async () => {
       await getRepoInfo();
       await getTasks();
+      console.log(repoInfo);
       if (user?.role === Role.Teacher && user.id === repoInfo?.ownerId) {
         await getInvites();
       }
     };
     fetchData();
-  }, []);
+  }, [user?.role, user?.id, repoInfo?.ownerId]);
 
   const addTask = async (title: string, description: string, date: string) => {
     console.log(date);
@@ -60,13 +62,11 @@ const CoursePage = () => {
       description,
       deadline: date,
     });
-    console.log(response);
     await getTasks();
   };
 
   const changeStatus = async (id: string, status: string) => {
     const response = await axios.put(`/api/Ticket/${id}`, { status });
-    console.log(response);
     await getInvites();
     await getRepoInfo();
   };
@@ -75,7 +75,6 @@ const CoursePage = () => {
     const response = await axios.post(`/api/Repository/remove-user/${id}`, {
       userId,
     });
-    console.log(response);
     await getRepoInfo();
   };
 
@@ -84,7 +83,6 @@ const CoursePage = () => {
     const response = await axios.put(`/api/Repository/${id}`, {
       name,
     });
-    console.log(response);
   };
 
   return (

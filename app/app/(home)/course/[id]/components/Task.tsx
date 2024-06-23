@@ -1,5 +1,6 @@
 import { useAxios } from "@/hooks/use-axios";
 import { convertDate } from "@/utils/convert-date";
+import { displayDate } from "@/utils/display-date";
 import { ClientPageRoot } from "next/dist/client/components/client-page";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -27,7 +28,7 @@ const TaskElement: React.FC<TaskElementProps> = ({ task }) => {
     <div className="w-2/5 border-2 border-gray-400 rounded-xl px-4 py-2">
       <div className="flex justify-between">
         <h1>{task.title}</h1>
-        <p className={`${colorOfDeadline}`}>{convertDate(task.deadline)}</p>
+        <p className={`${colorOfDeadline}`}>{displayDate(task.deadline)}</p>
       </div>
       <div className="flex justify-end">
         <button
