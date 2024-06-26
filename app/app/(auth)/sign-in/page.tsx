@@ -2,6 +2,7 @@
 import Link from "next/link";
 import SubmitButton from "@/components/SubmitButton";
 import Input from "@/components/Input";
+import Cookies from "js-cookie";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -18,6 +19,7 @@ const SignInPage = () => {
     password: "",
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const router = useRouter();
 
@@ -31,9 +33,12 @@ const SignInPage = () => {
       );
       setLoading(false);
       const token = response.data.accessToken;
+      Cookies.set("token", token);
       localStorage.setItem("token", token);
       router.push("/home");
-    } catch (err) {
+    } catch (err: any) {
+      setError(err.response.data.message);
+      setLoading(false);
       console.log(err);
     }
   };
@@ -64,6 +69,9 @@ const SignInPage = () => {
             "Zaloguj się"
           )}
         </SubmitButton>
+        {error && (
+          <p className="text-red-500 mt-2 text-sm text-center">{error}</p>
+        )}
       </form>
     </div>
   );

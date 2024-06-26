@@ -24,6 +24,7 @@ const SignUpPage = () => {
     role: "Student",
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const router = useRouter();
 
@@ -38,7 +39,9 @@ const SignUpPage = () => {
       );
       setLoading(false);
       router.push("/sign-in");
-    } catch (err) {
+    } catch (err: any) {
+      setError(err.response.data.message);
+      setLoading(false);
       console.log(err);
     }
   };
@@ -82,11 +85,14 @@ const SignUpPage = () => {
         </div>
         <SubmitButton>
           {loading ? (
-            <LoadingSpinner width={4} height={4} />
+            <LoadingSpinner width={1.25} height={1.25} />
           ) : (
             "Zarejestruj się"
           )}
         </SubmitButton>
+        {error && (
+          <p className="text-red-500 mt-2 text-sm text-center">{error}</p>
+        )}
       </form>
     </div>
   );
