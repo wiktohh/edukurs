@@ -7,6 +7,7 @@ using Application.Query.TasksQueries.GetAllTasks;
 using Application.Query.TasksQueries.GetTaskById;
 using Application.Query.TasksQueries.GetTasksFromRepo;
 using Application.Query.TasksQueries.StatsForTask;
+using Domain.ValueObjects.RepTask;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -69,7 +70,7 @@ public class TaskController : ControllerBase
     
     [HttpPut("{taskId}")]
     [Authorize (Roles = "Teacher")]
-    public async Task<IActionResult> UpdateTask([FromRoute]Guid taskId,[FromBody] DateTime Deadline)
+    public async Task<IActionResult> UpdateTask([FromRoute]Guid taskId,[FromBody] Deadline Deadline)
     {
         if(User.Identity?.Name is null)
         {
