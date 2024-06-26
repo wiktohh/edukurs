@@ -25,7 +25,8 @@ internal class SignUpUserCommandHandler : IRequestHandler<SignUpUserCommand>
     {
         var user = await _accountRepository.GetByEmailAsync(request.Email);
         var emailUnique = await _accountRepository.isEmailUniqueAsync(request.Email);
-        if (!emailUnique)
+        
+        if (emailUnique)
         {
             throw new UserAlreadyExistsException(request.Email);
         }

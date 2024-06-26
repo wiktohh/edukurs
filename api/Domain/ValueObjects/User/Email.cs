@@ -5,7 +5,9 @@ namespace Domain.ValueObjects.User;
 
 public record Email
 {
-    Regex regex = new(@"^([\w\.\-]+)@polsl\.pl");
+    
+    //create standard regex2 for email
+    Regex regex = new(@"^([\w\.\-]+)@gmail\.com");
     
     
     
