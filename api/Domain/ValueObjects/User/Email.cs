@@ -6,7 +6,7 @@ namespace Domain.ValueObjects.User;
 public record Email
 {
     //write regular expression to validate email
-    Regex regex = new(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+    Regex regex = new(@"^([\w\.\-]+)@polsl\.pl");
     
     
     
